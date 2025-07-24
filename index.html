@@ -1,83 +1,86 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SIPEDARU - Sistem Informasi Dusun RW RT</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Beranda | SIPEDARU</title>
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom, #ff0000 0%, #ffffff 100%);
+      background-color: #f5f5f5;
       color: #333;
     }
-
     header {
-      background-color: #d40000;
-      padding: 1rem 2rem;
+      background-color: #b30000;
       color: white;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 4px solid #003d91; /* Biru Korpri */
+      text-align: center;
+      padding: 1.2rem;
     }
-
-    header img {
-      height: 60px;
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
     }
-
+    header p {
+      margin: 0;
+      font-size: 1rem;
+    }
     nav {
-      background-color: #fff;
-      border-bottom: 2px solid #003d91;
       display: flex;
       justify-content: center;
-      gap: 1.5rem;
-      padding: 1rem;
-      font-weight: bold;
+      flex-wrap: wrap;
+      background-color: white;
+      border-bottom: 4px solid #1e90ff;
     }
-
     nav a {
       text-decoration: none;
-      color: #d40000;
-      transition: 0.3s;
-    }
-
-    nav a:hover {
-      color: #003d91;
-    }
-
-    main {
-      padding: 2rem;
-      text-align: center;
-    }
-
-    h1 {
-      color: #d40000;
-    }
-
-    .btn {
-      background-color: #003d91;
-      color: white;
-      border: none;
+      color: #b30000;
+      font-weight: bold;
       padding: 0.75rem 1.5rem;
-      font-size: 1rem;
-      border-radius: 5px;
-      cursor: pointer;
+      display: block;
+    }
+    nav a:hover {
+      background-color: #f0f0f0;
     }
 
-    .btn:hover {
-      background-color: #001e4d;
+    .container {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+
+    .box {
+      background: white;
+      border-left: 6px solid #1e90ff;
+      border-radius: 4px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+    }
+
+    .box h3 {
+      color: #b30000;
+      margin-top: 0;
+    }
+
+    .box ul {
+      padding-left: 1.2rem;
+    }
+
+    footer {
+      background-color: #1e90ff;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
     }
   </style>
 </head>
 <body>
+
   <header>
-    <div style="display: flex; align-items: center; gap: 1rem">
-      <img src="logo-garuda.png" alt="Logo Garuda">
-      <h2>SIPEDARU</h2>
-    </div>
-    <strong>Sistem Informasi Pelayanan & Data Terpadu Dusun-RW-RT</strong>
+    <h1>SIPEDARU</h1>
+    <p>Sistem Informasi Pelayanan & Data Terpadu Dusun - RW - RT</p>
   </header>
 
   <nav>
@@ -86,15 +89,53 @@
     <a href="kadus.html">Kadus</a>
     <a href="rw.html">RW</a>
     <a href="rt.html">RT</a>
-    <a href="bantuan.html">Data Bantuan</a>
+    <a href="bantuan.html">Bantuan</a>
     <a href="rekap.html">Rekap</a>
   </nav>
 
-  <main>
-    <h1>Selamat Datang di SIPEDARU</h1>
-    <p>Sistem informasi terpadu untuk mempercepat layanan dan pendataan dari Kepala Dusun, RW, hingga RT secara digital dan responsif.</p>
-    <br>
-    <a href="bantuan.html" class="btn">Input Data Bantuan</a>
-  </main>
+  <div class="container">
+
+    <div class="box">
+      <h3>📌 Selamat Datang</h3>
+      <p>Selamat datang di <strong>SIPEDARU</strong>, sistem digital yang mempermudah pelayanan, penyampaian informasi, dan pengelolaan data secara terpadu dari tingkat Dusun, RW hingga RT.</p>
+    </div>
+
+    <div class="box">
+      <h3>📢 Informasi dari Pemerintah Desa</h3>
+      <p><strong>Instruksi:</strong> Setiap Kadus diminta melakukan pendataan ulang warga penerima bantuan sosial sebelum tanggal <strong>10 setiap bulannya</strong>.</p>
+      <p><strong>Tujuan:</strong> Memastikan data yang akurat agar penyaluran bantuan tepat sasaran.</p>
+    </div>
+
+    <div class="box">
+      <h3>🧭 Tindak Lanjut dari Kadus</h3>
+      <ul>
+        <li>Kadus 1 telah menginstruksikan RW untuk mulai pendataan. Target selesai: 7 hari.</li>
+        <li>Kadus 2 menunggu klarifikasi kriteria penerima bantuan dari Pemdes.</li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <h3>📍 Status Pelaksanaan oleh RW</h3>
+      <ul>
+        <li>RW 01: Sudah mengumpulkan 90% data. Menunggu verifikasi akhir dari 3 RT.</li>
+        <li>RW 02: Pendataan baru dimulai di 2 RT. Kendala: banyak warga kerja di luar kota.</li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <h3>✅ Update Realisasi RT</h3>
+      <ul>
+        <li>RT 01: Pendataan selesai dan sudah dikirim ke RW.</li>
+        <li>RT 02: Masih proses input. Warga bekerja malam, belum ditemui.</li>
+        <li>RT 05: Kendala jaringan internet, pengiriman tertunda.</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <footer>
+    &copy; 2025 SIPEDARU | Pemerintah Desa Keling - All Rights Reserved
+  </footer>
+
 </body>
 </html>
