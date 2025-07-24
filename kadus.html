@@ -1,19 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<body>
-  <header>
-    <h1>Dashboard Kepala Dusun (Kadus) - SIPEDARU</h1>
-  </header>
-  <nav>
-    <a href="index.html">Beranda</a>
-    <a href="pemdes.html">Pemdes</a>
-    <a href="kadus.html">Kadus</a>
-    <a href="rw.html">RW</a>
-    <a href="rt.html">RT</a>
-    <a href="bantuan.html">Bantuan</a>
-    <a href="rekap.html">Rekap</a>
-  </nav>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard Kadus</title>
@@ -30,6 +17,19 @@
       color: #fff;
       padding: 1rem 2rem;
       text-align: center;
+    }
+    nav {
+      background-color: #fff;
+      padding: 0.8rem 2rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      border-bottom: 2px solid #004080;
+    }
+    nav a {
+      text-decoration: none;
+      color: #b30000;
+      font-weight: bold;
     }
     main {
       padding: 2rem;
@@ -81,15 +81,34 @@
     th {
       background-color: #f2f2f2;
     }
-    .status-done { color: green; font-weight: bold; }
-    .status-pending { color: red; font-weight: bold; }
-    .status-kendala { color: orange; font-weight: bold; }
+    .status-done {
+      color: green;
+      font-weight: bold;
+    }
+    .status-pending {
+      color: red;
+      font-weight: bold;
+    }
+    .status-kendala {
+      color: orange;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1>Dashboard Kepala Dusun</h1>
+    <h1>Dashboard Kepala Dusun (Kadus) - SIPEDARU</h1>
   </header>
+
+  <nav>
+    <a href="index.html">Beranda</a>
+    <a href="pemdes.html">Pemdes</a>
+    <a href="kadus.html">Kadus</a>
+    <a href="rw.html">RW</a>
+    <a href="rt.html">RT</a>
+    <a href="bantuan.html">Bantuan</a>
+    <a href="rekap.html">Rekap</a>
+  </nav>
 
   <main>
     <!-- Informasi dari Pemdes -->
@@ -145,7 +164,7 @@
     <!-- Kirim Informasi Baru -->
     <section>
       <h2>📩 Kirim Informasi ke RW</h2>
-      <input type="text" placeholder="Judul informasi...">
+      <input type="text" placeholder="Judul informasi..." />
       <textarea placeholder="Isi informasi untuk RW..."></textarea>
       <button onclick="alert('Informasi berhasil dikirim ke RW!')">Kirim ke RW</button>
     </section>
