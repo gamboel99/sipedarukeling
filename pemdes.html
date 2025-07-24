@@ -3,212 +3,180 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Halaman Pemdes</title>
+  <title>Pemdes Dashboard</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0;
+      font-family: Arial, sans-serif;
       background-color: #f4f6f9;
+      padding: 20px;
+      margin: 0;
     }
-
-    header {
-      background-color: #c62828;
-      color: #fff;
-      padding: 15px;
-      text-align: center;
+    header, h2 {
+      color: #2c3e50;
     }
-
-    nav {
-      background-color: #333;
-      overflow: hidden;
-    }
-
-    nav a {
-      float: left;
-      display: block;
+    .nav {
+      background-color: #2c3e50;
       color: white;
-      text-align: center;
-      padding: 12px 16px;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav a {
+      color: white;
+      margin-right: 20px;
       text-decoration: none;
     }
-
-    nav a:hover {
-      background-color: #575757;
-    }
-
-    main {
+    .container {
+      background: white;
       padding: 20px;
-    }
-
-    h2 {
-      margin-top: 40px;
-      color: #c62828;
-    }
-
-    form, table {
-      background: #fff;
       border-radius: 8px;
-      padding: 20px;
-      margin-bottom: 40px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-top: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-
-    input, textarea, select {
+    table {
       width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 4px;
+      border-collapse: collapse;
+      margin-top: 10px;
     }
-
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+    textarea, input[type="text"], input[type="date"] {
+      width: 100%;
+      padding: 8px;
+      margin: 5px 0 10px;
+    }
     button {
-      background-color: #c62828;
+      padding: 10px 15px;
+      background-color: #007bff;
       color: white;
-      padding: 10px 20px;
       border: none;
       border-radius: 4px;
       cursor: pointer;
     }
-
-    button:hover {
-      background-color: #b71c1c;
+    button.export {
+      background-color: green;
     }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    table th, table td {
-      padding: 10px;
-      border-bottom: 1px solid #ddd;
-      text-align: left;
-    }
-
-    table th {
-      background-color: #e53935;
-      color: white;
-    }
-
-    .action-btn {
-      padding: 6px 12px;
-      background-color: #0288d1;
-      color: white;
-      border: none;
-      border-radius: 4px;
-    }
-
-    .action-btn:hover {
-      background-color: #0277bd;
+    button.whatsapp {
+      background-color: #25D366;
     }
   </style>
 </head>
 <body>
 
-<header>
-  <h1>Halaman Pemdes</h1>
-</header>
+  <div class="nav">
+    <div><strong>SIPEDARU - PEMDES</strong></div>
+    <div>
+      <a href="index.html">Beranda</a>
+      <a href="pemdes.html">Pemdes</a>
+      <a href="kadus.html">Kadus</a>
+      <a href="rw.html">RW</a>
+      <a href="rt.html">RT</a>
+    </div>
+  </div>
 
-<nav>
-  <a href="index.html">Beranda</a>
-  <a href="pemdes.html">Pemdes</a>
-  <a href="kadus.html">Kadus</a>
-  <a href="rw.html">RW</a>
-  <a href="rt.html">RT</a>
-  <a href="bantuan.html">Bantuan</a>
-  <a href="rekap.html">Rekap</a>
-</nav>
+  <div class="container">
+    <h2>📋 Daftar Informasi & Perintah Pemdes</h2>
+    <table id="infoTable">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Tanggal</th>
+          <th>Judul</th>
+          <th>Isi</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
 
-<main>
-  <h2>Input Informasi & Perintah Baru</h2>
-  <form id="formPerintah">
-    <label>Judul Perintah/Informasi</label>
-    <input type="text" id="judul" required />
+    <h3>➕ Tambah Informasi / Perintah Baru</h3>
+    <form id="infoForm">
+      <label>Judul:</label>
+      <input type="text" id="judul" required />
+      <label>Tanggal:</label>
+      <input type="date" id="tanggal" required />
+      <label>Isi Informasi / Perintah:</label>
+      <textarea id="isi" required></textarea>
+      <button type="submit">Tambah ke Daftar</button>
+    </form>
 
-    <label>Isi Perintah/Informasi</label>
-    <textarea id="isi" rows="4" required></textarea>
+    <br />
+    <button class="whatsapp" onclick="kirimWA()">Kirim ke Grup Kadus</button>
+    <button class="export" onclick="downloadExcel()">Download Excel Workbook</button>
+  </div>
 
-    <button type="submit">Tambah ke Daftar</button>
-  </form>
+  <div class="container">
+    <h2>📨 Feedback & Laporan dari Kadus</h2>
+    <table id="feedbackTable">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Nama Kadus</th>
+          <th>Tanggal</th>
+          <th>Laporan</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>Kasun Timur</td><td>2025-07-20</td><td>Sudah sosialisasi ke RW 01–RW 04</td></tr>
+        <tr><td>2</td><td>Kasun Barat</td><td>2025-07-21</td><td>RW 06 masih terkendala kehadiran pengurus</td></tr>
+      </tbody>
+    </table>
+  </div>
 
-  <h2>Daftar Perintah/Informasi untuk Dikirim ke Kasun</h2>
-  <table id="tabelPerintah">
-    <thead>
-      <tr>
-        <th>No</th>
-        <th>Judul</th>
-        <th>Isi</th>
-        <th>Aksi</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Dinamis -->
-    </tbody>
-  </table>
+  <script>
+    const infoForm = document.getElementById("infoForm");
+    const infoTableBody = document.querySelector("#infoTable tbody");
+    let infoList = [];
 
-  <h2>Feedback & Laporan dari Para Kasun</h2>
-  <table id="tabelFeedback">
-    <thead>
-      <tr>
-        <th>No</th>
-        <th>Nama Kasun</th>
-        <th>Isi Feedback/Laporan</th>
-        <th>Tanggal</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Dummy Data -->
-      <tr>
-        <td>1</td>
-        <td>Kasun A</td>
-        <td>Sudah diteruskan ke RW 1-5, namun RT 2 belum merespon</td>
-        <td>2025-07-24</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Kasun B</td>
-        <td>Ada kendala distribusi informasi karena sinyal buruk</td>
-        <td>2025-07-24</td>
-      </tr>
-    </tbody>
-  </table>
-</main>
-
-<script>
-  const form = document.getElementById('formPerintah');
-  const tabelBody = document.querySelector('#tabelPerintah tbody');
-  let daftarPerintah = [];
-
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const judul = document.getElementById('judul').value;
-    const isi = document.getElementById('isi').value;
-
-    daftarPerintah.push({ judul, isi });
-    renderTabel();
-    form.reset();
-  });
-
-  function renderTabel() {
-    tabelBody.innerHTML = '';
-    daftarPerintah.forEach((item, index) => {
-      const row = document.createElement('tr');
-      row.innerHTML = `
-        <td>${index + 1}</td>
-        <td>${item.judul}</td>
-        <td>${item.isi}</td>
-        <td><button class="action-btn" onclick="kirim(${index})">Kirim ke Kasun</button></td>
-      `;
-      tabelBody.appendChild(row);
+    infoForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+      const judul = document.getElementById("judul").value;
+      const tanggal = document.getElementById("tanggal").value;
+      const isi = document.getElementById("isi").value;
+      infoList.push({ judul, tanggal, isi });
+      renderTable();
+      infoForm.reset();
     });
-  }
 
-  function kirim(index) {
-    alert('Perintah dikirim ke seluruh Kasun:\n\n' + daftarPerintah[index].judul + '\n' + daftarPerintah[index].isi);
-    // Simulasikan pengiriman (bisa integrasi WA atau backend di masa depan)
-  }
+    function renderTable() {
+      infoTableBody.innerHTML = "";
+      infoList.forEach((item, index) => {
+        const row = `<tr>
+          <td>${index + 1}</td>
+          <td>${item.tanggal}</td>
+          <td>${item.judul}</td>
+          <td>${item.isi}</td>
+          <td><button onclick="kirimWA('${item.judul} — ${item.isi}')">Kirim WA</button></td>
+        </tr>`;
+        infoTableBody.innerHTML += row;
+      });
+    }
 
-</script>
+    function kirimWA(pesan = "Ada informasi penting dari Pemdes, silakan dicek.") {
+      const encoded = encodeURIComponent(pesan);
+      const url = `https://wa.me/?text=${encoded}`;
+      window.open(url, "_blank");
+    }
+
+    function downloadExcel() {
+      let csvContent = "data:text/csv;charset=utf-8,No,Tanggal,Judul,Isi\n";
+      infoList.forEach((item, i) => {
+        csvContent += `${i + 1},${item.tanggal},"${item.judul}","${item.isi}"\n`;
+      });
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", "informasi_pemdes.xlsx");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  </script>
 </body>
 </html>
