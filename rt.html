@@ -3,209 +3,179 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dashboard Ketua RT | SIPEDARU</title>
+  <title>Dashboard RT - SIPEDARU</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
   <style>
     body {
+      background-color: #f5f5f5;
       font-family: 'Segoe UI', sans-serif;
-      background-color: #f2f2f2;
-      color: #333;
-      margin: 0;
-      padding: 0;
     }
-    header, nav {
-      background-color: #8b0000;
+    header {
+      background-color: red;
       color: white;
-      padding: 1rem;
-      text-align: center;
+      padding: 10px 20px;
+      border-bottom: 3px solid #007BFF;
     }
-    nav {
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
+    .menu-bar {
+      background-color: #ffffff;
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
     }
-    nav a {
-      color: white;
-      text-decoration: none;
-      margin: 0.5rem;
+    .menu-bar a {
+      margin-right: 15px;
       font-weight: bold;
+      text-decoration: none;
+      color: #007BFF;
     }
-    main {
-      padding: 1rem;
-      max-width: 1000px;
-      margin: auto;
-      background: white;
+    .form-section {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
     }
-    section {
-      margin-bottom: 2rem;
+    footer {
+      background-color: #eaeaea;
+      text-align: center;
+      padding: 10px;
+      margin-top: 30px;
     }
-    label, input, select, textarea {
-      display: block;
-      width: 100%;
-      margin-top: 0.5rem;
-      margin-bottom: 1rem;
-      padding: 0.5rem;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 1rem;
-    }
-    table, th, td {
-      border: 1px solid #ccc;
-    }
-    th, td {
-      padding: 0.5rem;
-      text-align: left;
-    }
-    button {
-      padding: 0.5rem 1rem;
-      background-color: #8b0000;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #a52a2a;
+    .table-wrapper {
+      overflow-x: auto;
     }
   </style>
 </head>
 <body>
 
 <header>
-  <h1>SIPEDARU - Dashboard Ketua RT</h1>
+  <h3>SIPEDARU - Sistem Informasi Pelayanan Dusun RW RT</h3>
 </header>
 
-<nav>
-  <a href="index.html">Beranda</a>
-  <a href="pemdes.html">Info Pemdes</a>
-  <a href="kadus.html">Dashboard Kadus</a>
-  <a href="rw.html">Dashboard RW</a>
-  <a href="rt.html">Dashboard RT</a>
-</nav>
+<div class="menu-bar">
+  <a href="index.html">🏠 Kembali ke Beranda</a>
+</div>
 
-<main>
+<div class="container my-4">
 
-  <section>
-    <h2>Autentikasi RT</h2>
-    <label for="rtLogin">Pilih RT:</label>
-    <select id="rtLogin">
+  <!-- Dropdown RT -->
+  <div class="form-section">
+    <h5>🧭 Pilih RT Anda</h5>
+    <select id="rtSelect" class="form-select">
       <option value="">-- Pilih RT --</option>
-      ${[...Array(30)].map((_, i) => `<option value="RT${i+1}">RT ${i+1}</option>`).join('')}
+      ${[...Array(30).keys()].map(i => `<option value="RT ${i+1}">RT ${i+1}</option>`).join('')}
     </select>
-    <label for="password">Password:</label>
-    <input type="password" id="password" placeholder="Masukkan password" />
-    <button onclick="loginRT()">Login</button>
-  </section>
+  </div>
 
-  <section>
-    <h2>Input Agenda Kegiatan RT</h2>
-    <label for="agenda">Rencana Kegiatan:</label>
-    <textarea id="agenda" rows="4" placeholder="Tulis agenda kegiatan..."></textarea>
-    <button onclick="simpanAgenda()">Simpan Agenda</button>
-  </section>
+  <!-- Form Agenda RT -->
+  <div class="form-section">
+    <h5>📝 Input Agenda RT</h5>
+    <form id="agendaForm">
+      <input type="text" class="form-control mb-2" placeholder="Judul Agenda" required />
+      <textarea class="form-control mb-2" placeholder="Deskripsi Agenda" required></textarea>
+      <input type="date" class="form-control mb-2" required />
+      <button type="submit" class="btn btn-primary">Simpan Agenda</button>
+    </form>
+  </div>
 
-  <section>
-    <h2>Laporan Realisasi Instruksi RW</h2>
-    <textarea id="laporanRealisasi" rows="4" placeholder="Laporan pelaksanaan perintah RW..."></textarea>
-    <label>Status Kendala:</label>
-    <select id="statusKendala">
-      <option value="selesai">Terselesaikan</option>
-      <option value="butuh-eskalasi">Perlu Eskalasi ke RW/Kadus/Pemdes</option>
-    </select>
-    <button onclick="simpanLaporan()">Simpan Laporan</button>
-  </section>
+  <!-- Form Realisasi RW -->
+  <div class="form-section">
+    <h5>📩 Realisasi Perintah RW</h5>
+    <form id="realisasiForm">
+      <textarea class="form-control mb-2" placeholder="Tulis laporan realisasi instruksi RW..." required></textarea>
+      <button type="submit" class="btn btn-success">Kirim Laporan</button>
+    </form>
+  </div>
 
-  <section>
-    <h2>Distribusi Informasi ke Warga & Feedback</h2>
-    <textarea id="isiInfo" rows="3" placeholder="Isi informasi untuk warga..."></textarea>
-    <button onclick="kirimWA()">Kirim ke WA Grup</button>
-    <h3>Feedback Warga</h3>
-    <ul id="feedbackList">
-      <li>Warga A: Sudah diterima, terima kasih!</li>
-      <li>Warga B: Mohon penjelasan lebih lanjut soal agenda...</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>Daftar Ketua Masyarakat per RT</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Nama</th><th>Alamat</th><th>No. Telp</th><th>Email</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Bpk. Darto</td><td>RT 1 / RW 1</td><td>0812xxxx</td><td>darto@contoh.com</td>
-        </tr>
-        <!-- Tambahkan data lainnya -->
-      </tbody>
-    </table>
-  </section>
-
-  <section>
-    <h2>Daftar Warga per RT</h2>
-    <label for="dropdownRT">Pilih RT:</label>
-    <select id="dropdownRT">
-      ${[...Array(30)].map((_, i) => `<option value="RT${i+1}">RT ${i+1}</option>`).join('')}
-    </select>
-    <div id="daftarWarga">
-      <!-- Data warga akan dimunculkan di sini -->
+  <!-- Daftar Warga -->
+  <div class="form-section">
+    <h5>📋 Daftar Warga RT</h5>
+    <div class="table-wrapper">
+      <table class="table table-bordered table-striped" id="wargaTable">
+        <thead>
+          <tr>
+            <th>No</th><th>Nama</th><th>Alamat</th><th>No. HP</th><th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Data diisi secara dinamis atau manual -->
+        </tbody>
+      </table>
     </div>
-  </section>
+    <button onclick="exportExcel()" class="btn btn-outline-success">📤 Export ke Excel</button>
+  </div>
 
-  <section>
-    <h2>Ekspor Data ke Excel</h2>
-    <button onclick="exportToExcel()">Unduh Laporan</button>
-  </section>
+  <!-- Feedback Warga -->
+  <div class="form-section">
+    <h5>💬 Form Feedback Warga</h5>
+    <form id="feedbackForm">
+      <input type="text" class="form-control mb-2" id="nama" placeholder="Nama Sesuai KTP" required />
+      <input type="text" class="form-control mb-2" id="rt" placeholder="RT" required />
+      <input type="text" class="form-control mb-2" id="rw" placeholder="RW" required />
+      <textarea class="form-control mb-2" id="pesan" placeholder="Pesan/Respon Anda..." required></textarea>
+      <textarea class="form-control mb-2" id="harapan" placeholder="Harapan Anda..." required></textarea>
+      <button type="submit" class="btn btn-primary">Kirim Feedback</button>
+    </form>
+  </div>
 
-</main>
+  <!-- Tabel Feedback -->
+  <div class="form-section">
+    <h5>📑 Daftar Feedback Warga</h5>
+    <div class="table-wrapper">
+      <table class="table table-bordered" id="feedbackTable">
+        <thead>
+          <tr>
+            <th>No</th><th>Nama</th><th>RT</th><th>RW</th><th>Pesan</th><th>Harapan</th><th>Tanggal</th><th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Diisi otomatis -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Kirim ke WA -->
+  <div class="form-section">
+    <h5>📲 Kirim Informasi ke WA Grup RT</h5>
+    <textarea id="waMessage" class="form-control mb-2" placeholder="Tulis pesan untuk WA Grup"></textarea>
+    <button onclick="kirimWA()" class="btn btn-success">Kirim ke WA Grup</button>
+  </div>
+
+</div>
+
+<footer>
+  &copy; 2025 SIPEDARU | Sistem Informasi Dusun RW RT
+</footer>
 
 <script>
-  function loginRT() {
-    const rt = document.getElementById('rtLogin').value;
-    const pass = document.getElementById('password').value;
-    if (rt && pass === "12345") {
-      alert(`Login berhasil sebagai ${rt}`);
-    } else {
-      alert("RT atau password salah!");
+  // Feedback form handler
+  document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const nama = document.getElementById('nama').value;
+    const rt = document.getElementById('rt').value;
+    const rw = document.getElementById('rw').value;
+    const pesan = document.getElementById('pesan').value;
+    const harapan = document.getElementById('harapan').value;
+    const tanggal = new Date().toLocaleDateString();
+    const table = document.getElementById('feedbackTable').querySelector('tbody');
+    const row = table.insertRow();
+    row.innerHTML = `<td>${table.rows.length+1}</td><td>${nama}</td><td>${rt}</td><td>${rw}</td><td>${pesan}</td><td>${harapan}</td><td>${tanggal}</td><td>Belum Ditanggapi</td>`;
+    this.reset();
+  });
+
+  // Kirim WA
+  function kirimWA() {
+    const pesan = document.getElementById('waMessage').value;
+    if (pesan) {
+      const url = `https://wa.me/?text=${encodeURIComponent(pesan)}`;
+      window.open(url, '_blank');
     }
   }
 
-  function simpanAgenda() {
-    const agenda = document.getElementById('agenda').value;
-    alert(`Agenda disimpan: ${agenda}`);
+  // Export to Excel (Workbook-style)
+  function exportExcel() {
+    alert('Fitur export Excel akan dikembangkan dengan SheetJS atau backend nanti. Sementara belum aktif.');
   }
-
-  function simpanLaporan() {
-    const laporan = document.getElementById('laporanRealisasi').value;
-    const status = document.getElementById('statusKendala').value;
-    alert(`Laporan disimpan: ${laporan} - Status: ${status}`);
-  }
-
-  function kirimWA() {
-    const info = document.getElementById('isiInfo').value;
-    const waLink = `https://wa.me/?text=${encodeURIComponent(info)}`;
-    window.open(waLink, '_blank');
-  }
-
-  function exportToExcel() {
-    alert("Fitur ekspor Excel aktif (simulasi) — bisa integrasi SheetJS.js untuk real.");
-  }
-
-  // Simulasi data warga
-  const warga = {
-    RT1: ["Warga A", "Warga B"],
-    RT2: ["Warga C", "Warga D"],
-    // dst...
-  };
-
-  document.getElementById("dropdownRT").addEventListener("change", function() {
-    const rt = this.value;
-    const list = warga[rt] || ["Belum ada data"];
-    document.getElementById("daftarWarga").innerHTML =
-      `<ul>${list.map(w => `<li>${w}</li>`).join("")}</ul>`;
-  });
 </script>
 
 </body>
