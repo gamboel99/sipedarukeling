@@ -1,160 +1,180 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Dashboard Kadus - SIPEDARU</title>
+<body>
+  <header>
+    <h1>Dashboard Kepala Dusun (Kadus) - SIPEDARU</h1>
+  </header>
+  <nav>
+    <a href="index.html">Beranda</a>
+    <a href="pemdes.html">Pemdes</a>
+    <a href="kadus.html">Kadus</a>
+    <a href="rw.html">RW</a>
+    <a href="rt.html">RT</a>
+    <a href="bantuan.html">Bantuan</a>
+    <a href="rekap.html">Rekap</a>
+  </nav>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Kadus</title>
   <style>
     body {
-      margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background: #f8f9fa;
+      margin: 0;
+      padding: 0;
+      background: #f4f7f9;
+      color: #333;
     }
     header {
-      background-color: #d60000;
+      background-color: #b30000;
+      color: #fff;
       padding: 1rem 2rem;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 5px solid #003366;
+      text-align: center;
     }
-    header h1 {
-      margin: 0;
-      font-size: 1.5rem;
+    main {
+      padding: 2rem;
+      max-width: 1100px;
+      margin: auto;
     }
-    nav button {
-      margin: 0 0.5rem;
-      padding: 0.5rem 1rem;
+    section {
+      background: #fff;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+    h2 {
+      margin-top: 0;
+      color: #b30000;
+    }
+    textarea, input[type="text"] {
+      width: 100%;
+      padding: 0.8rem;
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      padding: 0.7rem 1.5rem;
+      background-color: #007bff;
+      color: #fff;
       border: none;
-      background-color: #003366;
-      color: white;
-      border-radius: 5px;
+      border-radius: 6px;
       cursor: pointer;
     }
-    nav button:hover {
-      background-color: #0055aa;
-    }
-    .container {
-      padding: 1rem 2rem;
-    }
-    .section {
-      display: none;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
-      padding: 1rem;
-      margin-top: 1rem;
+    button:hover {
+      background-color: #0056b3;
     }
     table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 1rem;
     }
+    table, th, td {
+      border: 1px solid #ddd;
+    }
     th, td {
-      padding: 0.5rem;
-      border: 1px solid #ccc;
+      padding: 0.7rem;
       text-align: left;
     }
-    .form-input {
-      margin: 0.5rem 0;
-      display: flex;
-      flex-direction: column;
+    th {
+      background-color: #f2f2f2;
     }
-    .form-input input, .form-input textarea {
-      padding: 0.5rem;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-    .form-input label {
-      margin-bottom: 0.3rem;
-    }
-    .submit-btn {
-      background: #003366;
-      color: white;
-      padding: 0.6rem 1.2rem;
-      border: none;
-      border-radius: 5px;
-      margin-top: 1rem;
-      cursor: pointer;
-    }
-    .submit-btn:hover {
-      background: #0055aa;
-    }
+    .status-done { color: green; font-weight: bold; }
+    .status-pending { color: red; font-weight: bold; }
+    .status-kendala { color: orange; font-weight: bold; }
   </style>
 </head>
 <body>
-
   <header>
-    <h1>SIPEDARU - Dashboard Kadus</h1>
-    <nav>
-      <button onclick="showSection('laporan')">Lihat Laporan RW</button>
-      <button onclick="showSection('unggah')">Unggah Data RW</button>
-    </nav>
+    <h1>Dashboard Kepala Dusun</h1>
   </header>
 
-  <div class="container">
-    <!-- Laporan RW -->
-    <div id="laporan" class="section">
-      <h2>Laporan RW</h2>
+  <main>
+    <!-- Informasi dari Pemdes -->
+    <section>
+      <h2>📌 Informasi Terbaru dari Pemdes</h2>
+      <p><strong>Judul:</strong> Validasi Penerima BLT Tahap 3</p>
+      <p><strong>Tanggal:</strong> 23 Juli 2025</p>
+      <p><strong>Isi:</strong> Segera lakukan validasi ulang terhadap data penerima BLT untuk tahap ke-3, batas akhir 30 Juli 2025.</p>
+    </section>
+
+    <!-- Langkah Tindak Lanjut -->
+    <section>
+      <h2>✅ Langkah Tindak Lanjut Kadus</h2>
+      <textarea placeholder="Tulis langkah yang akan Anda lakukan..."></textarea>
+      <button onclick="alert('Langkah tindak lanjut tersimpan!')">Kirim Tindak Lanjut</button>
+    </section>
+
+    <!-- Status RW -->
+    <section>
+      <h2>📊 Status Respons RW</h2>
       <table>
         <thead>
           <tr>
-            <th>RW</th>
-            <th>Jumlah KK</th>
-            <th>Kebutuhan</th>
-            <th>Keterangan</th>
+            <th>Nama RW</th>
+            <th>Status</th>
+            <th>Waktu Respons</th>
+            <th>Catatan</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td>RW 01</td>
-            <td>120</td>
-            <td>Sembako</td>
-            <td>Layak bantuan</td>
+            <td class="status-done">✅ Sudah</td>
+            <td>24 Juli 2025 10:12</td>
+            <td>Data dikirim lengkap</td>
           </tr>
           <tr>
             <td>RW 02</td>
-            <td>98</td>
-            <td>Perbaikan Jalan</td>
-            <td>Urgent</td>
+            <td class="status-pending">❌ Belum</td>
+            <td>-</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>RW 03</td>
+            <td class="status-kendala">⚠️ Kendala</td>
+            <td>24 Juli 2025 13:05</td>
+            <td>Kendala validasi lapangan</td>
           </tr>
         </tbody>
       </table>
-    </div>
+    </section>
 
-    <!-- Unggah Data RW -->
-    <div id="unggah" class="section">
-      <h2>Form Unggah Data RW</h2>
-      <form onsubmit="event.preventDefault(); alert('Data berhasil dikirim (simulasi).');">
-        <div class="form-input">
-          <label for="rw">Nomor RW</label>
-          <input type="text" id="rw" required>
-        </div>
-        <div class="form-input">
-          <label for="jumlah">Jumlah KK</label>
-          <input type="number" id="jumlah" required>
-        </div>
-        <div class="form-input">
-          <label for="kebutuhan">Kebutuhan</label>
-          <input type="text" id="kebutuhan" required>
-        </div>
-        <div class="form-input">
-          <label for="keterangan">Keterangan</label>
-          <textarea id="keterangan" rows="3" required></textarea>
-        </div>
-        <button type="submit" class="submit-btn">Kirim Data</button>
-      </form>
-    </div>
-  </div>
+    <!-- Kirim Informasi Baru -->
+    <section>
+      <h2>📩 Kirim Informasi ke RW</h2>
+      <input type="text" placeholder="Judul informasi...">
+      <textarea placeholder="Isi informasi untuk RW..."></textarea>
+      <button onclick="alert('Informasi berhasil dikirim ke RW!')">Kirim ke RW</button>
+    </section>
 
-  <script>
-    function showSection(id) {
-      document.querySelectorAll('.section').forEach(s => s.style.display = 'none');
-      document.getElementById(id).style.display = 'block';
-    }
-    // Tampilkan laporan secara default saat halaman dibuka
-    showSection('laporan');
-  </script>
+    <!-- Balasan dari RW -->
+    <section>
+      <h2>💬 Balasan dari RW</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>RW</th>
+            <th>Balasan</th>
+            <th>Waktu</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>RW 01</td>
+            <td>Data sudah dikirim ke Pemdes</td>
+            <td>24 Juli 2025 12:30</td>
+          </tr>
+          <tr>
+            <td>RW 03</td>
+            <td>Beberapa warga belum ditemukan</td>
+            <td>24 Juli 2025 14:10</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
 </body>
 </html>
