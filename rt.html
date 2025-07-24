@@ -1,180 +1,222 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dashboard RT - SIPEDARU</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard Ketua RT - SIPEDARU</title>
   <style>
     body {
-      background-color: #f5f5f5;
       font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f0f2f5;
+      color: #333;
     }
     header {
-      background-color: red;
+      background-color: #b30000;
       color: white;
-      padding: 10px 20px;
-      border-bottom: 3px solid #007BFF;
-    }
-    .menu-bar {
-      background-color: #ffffff;
-      padding: 10px;
-      border-bottom: 1px solid #ccc;
-    }
-    .menu-bar a {
-      margin-right: 15px;
-      font-weight: bold;
-      text-decoration: none;
-      color: #007BFF;
-    }
-    .form-section {
-      background-color: white;
-      padding: 20px;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      box-shadow: 0 0 8px rgba(0,0,0,0.1);
-    }
-    footer {
-      background-color: #eaeaea;
+      padding: 1rem;
       text-align: center;
-      padding: 10px;
-      margin-top: 30px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
-    .table-wrapper {
-      overflow-x: auto;
+    nav {
+      background-color: #002b5c;
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0.5rem;
+    }
+    nav a {
+      color: white;
+      margin-right: 1rem;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    section {
+      padding: 1rem;
+      background: white;
+      margin: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    h2 {
+      border-bottom: 2px solid #002b5c;
+      padding-bottom: 5px;
+    }
+    input, select, textarea, button {
+      padding: 0.5rem;
+      margin: 5px 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+    table, th, td {
+      border: 1px solid #ccc;
+      padding: 0.5rem;
+    }
+    .btn {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background-color: #0056b3;
+    }
+    .small {
+      font-size: 0.85rem;
+      color: gray;
     }
   </style>
 </head>
 <body>
 
 <header>
-  <h3>SIPEDARU - Sistem Informasi Pelayanan Dusun RW RT</h3>
+  <h1>SIPEDARU - Ketua RT</h1>
 </header>
 
-<div class="menu-bar">
-  <a href="index.html">🏠 Kembali ke Beranda</a>
-</div>
+<nav>
+  <a href="index.html">🏠 Dashboard</a>
+  <a href="rt.html">📋 RT</a>
+</nav>
 
-<div class="container my-4">
-
-  <!-- Dropdown RT -->
-  <div class="form-section">
-    <h5>🧭 Pilih RT Anda</h5>
-    <select id="rtSelect" class="form-select">
-      <option value="">-- Pilih RT --</option>
-      ${[...Array(30).keys()].map(i => `<option value="RT ${i+1}">RT ${i+1}</option>`).join('')}
-    </select>
+<section>
+  <h2>📌 Informasi dari Ketua RW</h2>
+  <div id="infoRW">
+    <p><strong>Perintah RW:</strong> Sosialisasi program kebersihan lingkungan akhir pekan ini.</p>
+    <p class="small">Tanggal Masuk: 23 Juli 2025</p>
   </div>
+</section>
 
-  <!-- Form Agenda RT -->
-  <div class="form-section">
-    <h5>📝 Input Agenda RT</h5>
-    <form id="agendaForm">
-      <input type="text" class="form-control mb-2" placeholder="Judul Agenda" required />
-      <textarea class="form-control mb-2" placeholder="Deskripsi Agenda" required></textarea>
-      <input type="date" class="form-control mb-2" required />
-      <button type="submit" class="btn btn-primary">Simpan Agenda</button>
-    </form>
-  </div>
+<section>
+  <h2>📝 Rencana & Realisasi Tindak Lanjut</h2>
+  <form id="formTindakLanjut">
+    <label>Rencana Aksi:</label>
+    <textarea required></textarea>
+    <label>Realisasi:</label>
+    <textarea></textarea>
+    <button type="submit" class="btn">Simpan</button>
+  </form>
+  <table id="tabelTindak">
+    <thead>
+      <tr><th>Rencana</th><th>Realisasi</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</section>
 
-  <!-- Form Realisasi RW -->
-  <div class="form-section">
-    <h5>📩 Realisasi Perintah RW</h5>
-    <form id="realisasiForm">
-      <textarea class="form-control mb-2" placeholder="Tulis laporan realisasi instruksi RW..." required></textarea>
-      <button type="submit" class="btn btn-success">Kirim Laporan</button>
-    </form>
-  </div>
+<section>
+  <h2>📤 Kirim Informasi ke Warga (WA Grup)</h2>
+  <form id="formWA">
+    <label>Isi Informasi:</label>
+    <textarea id="isiPesanWA" required></textarea>
+    <button type="button" class="btn" onclick="kirimWA()">Kirim ke WhatsApp</button>
+  </form>
+</section>
 
-  <!-- Daftar Warga -->
-  <div class="form-section">
-    <h5>📋 Daftar Warga RT</h5>
-    <div class="table-wrapper">
-      <table class="table table-bordered table-striped" id="wargaTable">
-        <thead>
-          <tr>
-            <th>No</th><th>Nama</th><th>Alamat</th><th>No. HP</th><th>Email</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Data diisi secara dinamis atau manual -->
-        </tbody>
-      </table>
-    </div>
-    <button onclick="exportExcel()" class="btn btn-outline-success">📤 Export ke Excel</button>
-  </div>
+<section>
+  <h2>📨 Feedback Warga</h2>
+  <form id="formFeedback">
+    <label>Nama:</label>
+    <input type="text" required>
+    <label>RT:</label>
+    <input type="number" min="1" max="30" required>
+    <label>RW:</label>
+    <input type="number" required>
+    <label>Pesan/Respon:</label>
+    <textarea required></textarea>
+    <label>Harapan:</label>
+    <textarea></textarea>
+    <button type="submit" class="btn">Kirim</button>
+  </form>
+  <table id="tabelFeedback">
+    <thead>
+      <tr><th>Nama</th><th>RT</th><th>RW</th><th>Pesan</th><th>Harapan</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</section>
 
-  <!-- Feedback Warga -->
-  <div class="form-section">
-    <h5>💬 Form Feedback Warga</h5>
-    <form id="feedbackForm">
-      <input type="text" class="form-control mb-2" id="nama" placeholder="Nama Sesuai KTP" required />
-      <input type="text" class="form-control mb-2" id="rt" placeholder="RT" required />
-      <input type="text" class="form-control mb-2" id="rw" placeholder="RW" required />
-      <textarea class="form-control mb-2" id="pesan" placeholder="Pesan/Respon Anda..." required></textarea>
-      <textarea class="form-control mb-2" id="harapan" placeholder="Harapan Anda..." required></textarea>
-      <button type="submit" class="btn btn-primary">Kirim Feedback</button>
-    </form>
-  </div>
+<section>
+  <h2>📋 Data Penduduk RT</h2>
+  <form id="formPenduduk">
+    <label>Nama:</label><input type="text" required>
+    <label>Alamat:</label><input type="text" required>
+    <label>No HP:</label><input type="text" required>
+    <label>Email:</label><input type="email">
+    <label>RT:</label><input type="number" required>
+    <label>RW:</label><input type="number" required>
+    <button type="submit" class="btn">Tambah Penduduk</button>
+  </form>
 
-  <!-- Tabel Feedback -->
-  <div class="form-section">
-    <h5>📑 Daftar Feedback Warga</h5>
-    <div class="table-wrapper">
-      <table class="table table-bordered" id="feedbackTable">
-        <thead>
-          <tr>
-            <th>No</th><th>Nama</th><th>RT</th><th>RW</th><th>Pesan</th><th>Harapan</th><th>Tanggal</th><th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Diisi otomatis -->
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- Kirim ke WA -->
-  <div class="form-section">
-    <h5>📲 Kirim Informasi ke WA Grup RT</h5>
-    <textarea id="waMessage" class="form-control mb-2" placeholder="Tulis pesan untuk WA Grup"></textarea>
-    <button onclick="kirimWA()" class="btn btn-success">Kirim ke WA Grup</button>
-  </div>
-
-</div>
-
-<footer>
-  &copy; 2025 SIPEDARU | Sistem Informasi Dusun RW RT
-</footer>
+  <label><strong>Lihat Data Penduduk RT:</strong></label>
+  <select id="dropdownRT">
+    <option value="">Pilih RT</option>
+    ${[...Array(30).keys()].map(i => `<option value="${i+1}">RT ${i+1}</option>`).join('')}
+  </select>
+  <div id="dataPenduduk"></div>
+  <button onclick="exportExcel()" class="btn">📥 Ekspor ke Excel</button>
+</section>
 
 <script>
-  // Feedback form handler
-  document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+  // Tindak lanjut
+  document.getElementById('formTindakLanjut').onsubmit = function(e) {
     e.preventDefault();
-    const nama = document.getElementById('nama').value;
-    const rt = document.getElementById('rt').value;
-    const rw = document.getElementById('rw').value;
-    const pesan = document.getElementById('pesan').value;
-    const harapan = document.getElementById('harapan').value;
-    const tanggal = new Date().toLocaleDateString();
-    const table = document.getElementById('feedbackTable').querySelector('tbody');
-    const row = table.insertRow();
-    row.innerHTML = `<td>${table.rows.length+1}</td><td>${nama}</td><td>${rt}</td><td>${rw}</td><td>${pesan}</td><td>${harapan}</td><td>${tanggal}</td><td>Belum Ditanggapi</td>`;
+    const rencana = this.querySelectorAll('textarea')[0].value;
+    const realisasi = this.querySelectorAll('textarea')[1].value;
+    const row = `<tr><td>${rencana}</td><td>${realisasi}</td></tr>`;
+    document.querySelector('#tabelTindak tbody').innerHTML += row;
     this.reset();
-  });
-
-  // Kirim WA
-  function kirimWA() {
-    const pesan = document.getElementById('waMessage').value;
-    if (pesan) {
-      const url = `https://wa.me/?text=${encodeURIComponent(pesan)}`;
-      window.open(url, '_blank');
-    }
   }
 
-  // Export to Excel (Workbook-style)
+  // WhatsApp
+  function kirimWA() {
+    const pesan = document.getElementById('isiPesanWA').value;
+    const url = `https://wa.me/?text=${encodeURIComponent(pesan)}`;
+    window.open(url, '_blank');
+  }
+
+  // Feedback warga
+  document.getElementById('formFeedback').onsubmit = function(e) {
+    e.preventDefault();
+    const data = [...this.querySelectorAll('input, textarea')].map(x => x.value);
+    const row = `<tr><td>${data[0]}</td><td>${data[1]}</td><td>${data[2]}</td><td>${data[3]}</td><td>${data[4]}</td></tr>`;
+    document.querySelector('#tabelFeedback tbody').innerHTML += row;
+    this.reset();
+  }
+
+  // Data penduduk
+  const penduduk = [];
+  document.getElementById('formPenduduk').onsubmit = function(e) {
+    e.preventDefault();
+    const data = [...this.querySelectorAll('input')].map(x => x.value);
+    penduduk.push({ nama: data[0], alamat: data[1], nohp: data[2], email: data[3], rt: data[4], rw: data[5] });
+    alert("Data penduduk ditambahkan!");
+    this.reset();
+  }
+
+  document.getElementById('dropdownRT').onchange = function() {
+    const rt = this.value;
+    const html = penduduk.filter(p => p.rt === rt).map(p => 
+      `<p><strong>${p.nama}</strong>, ${p.alamat}, Telp: ${p.nohp}, Email: ${p.email}</p>`).join('');
+    document.getElementById('dataPenduduk').innerHTML = html || 'Tidak ada data.';
+  }
+
+  // Export Excel
   function exportExcel() {
-    alert('Fitur export Excel akan dikembangkan dengan SheetJS atau backend nanti. Sementara belum aktif.');
+    let csv = "Nama,Alamat,No HP,Email,RT,RW\n";
+    penduduk.forEach(p => {
+      csv += `${p.nama},${p.alamat},${p.nohp},${p.email},${p.rt},${p.rw}\n`;
+    });
+    const blob = new Blob([csv], {type: "application/vnd.ms-excel"});
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "data_penduduk_rt.csv";
+    a.click();
   }
 </script>
 
