@@ -3,122 +3,158 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Rekapitulasi Interaksi Pelayanan</title>
+  <title>Rekap SIPEDARU</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background-color: #f4f6f9;
-      color: #333;
-      padding: 20px;
+      margin: 0;
+      background: #f4f6f8;
     }
     header {
-      background-color: #b22222;
+      background-color: #bb1e1e;
       color: white;
-      padding: 20px;
+      padding: 1rem;
       text-align: center;
-      border-radius: 8px;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: #1a4a7c;
+    }
+    nav a {
+      padding: 1rem;
+      color: white;
+      text-decoration: none;
+    }
+    nav a:hover {
+      background-color: #163d6b;
+    }
+    section {
+      padding: 1rem 2rem;
+    }
+    .box {
+      background: white;
+      border: 1px solid #ddd;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 6px;
     }
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 20px;
-      background-color: #fff;
+      margin-top: 1rem;
+    }
+    table, th, td {
+      border: 1px solid #bbb;
     }
     th, td {
-      border: 1px solid #ddd;
-      padding: 12px;
+      padding: 0.5rem;
       text-align: left;
     }
-    th {
-      background-color: #e6e6e6;
-    }
     .actions {
-      margin-top: 20px;
+      margin-top: 1.5rem;
       display: flex;
-      gap: 10px;
+      gap: 1rem;
+      flex-wrap: wrap;
     }
-    .btn {
-      padding: 10px 16px;
+    button {
+      background: #007e6a;
+      color: white;
       border: none;
-      border-radius: 6px;
+      padding: 0.7rem 1.2rem;
+      border-radius: 5px;
       cursor: pointer;
-      font-weight: bold;
     }
-    .btn-excel {
-      background-color: #28a745;
-      color: white;
-    }
-    .btn-kirim {
-      background-color: #007bff;
-      color: white;
-    }
-    @media screen and (max-width: 768px) {
-      .actions {
-        flex-direction: column;
-      }
+    button:hover {
+      background: #005c4d;
     }
   </style>
 </head>
 <body>
 
 <header>
-  <h1>Rekapitulasi Pelayanan Warga</h1>
-  <p>Dokumentasi Interaksi dari Pemdes hingga RT</p>
+  <h1>REKAP SIPEDARU - Dusun/RW/RT</h1>
 </header>
 
+<nav>
+  <a href="index.html">Beranda</a>
+  <a href="pemdes.html">Pemdes</a>
+  <a href="kadus.html">Kadus</a>
+  <a href="rw.html">RW</a>
+  <a href="rt.html">RT</a>
+  <a href="rekap.html">Rekap</a>
+</nav>
+
 <section>
-  <h2>Ringkasan Temuan & Hambatan</h2>
-  <table id="rekapTable">
-    <thead>
-      <tr>
-        <th>Tanggal</th>
-        <th>Asal Informasi</th>
-        <th>Tujuan Informasi</th>
-        <th>Isi Informasi</th>
-        <th>Hambatan</th>
-        <th>Jumlah Terulang</th>
-        <th>Solusi</th>
-        <th>Realisasi</th>
-        <th>Respon Warga</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>24-07-2025</td>
-        <td>Pemdes</td>
-        <td>Kadus 1</td>
-        <td>Gotong royong bersih desa</td>
-        <td>Minim alat kebersihan</td>
-        <td>3x</td>
-        <td>Pinjam alat ke desa tetangga</td>
-        <td>Sudah dilakukan</td>
-        <td>Warga antusias, namun butuh air bersih</td>
-      </tr>
-      <!-- Tambahkan baris sesuai data -->
-    </tbody>
-  </table>
+  <div class="box">
+    <h2>Rekap Interaksi & Implementasi - Pemdes</h2>
+    <table id="rekapPemdes">
+      <tr><th>Perintah</th><th>Respon Kadus</th><th>Realisasi</th><th>Hambatan</th><th>Solusi</th></tr>
+      <tr><td>Perbaikan Jalan</td><td>Sudah diteruskan</td><td>Sedang proses</td><td>Cuaca buruk</td><td>Jadwal ulang pengerjaan</td></tr>
+    </table>
+  </div>
+
+  <div class="box">
+    <h2>Rekap Interaksi & Implementasi - Kadus</h2>
+    <table id="rekapKadus">
+      <tr><th>Perintah</th><th>Respon RW</th><th>Realisasi</th><th>Hambatan</th><th>Solusi</th></tr>
+      <tr><td>Gotong Royong</td><td>Sudah diteruskan ke RW</td><td>Terlaksana sebagian</td><td>Kurang partisipasi</td><td>Penguatan koordinasi</td></tr>
+    </table>
+  </div>
+
+  <div class="box">
+    <h2>Rekap Interaksi & Implementasi - RW</h2>
+    <table id="rekapRW">
+      <tr><th>Perintah</th><th>Respon RT</th><th>Realisasi</th><th>Hambatan</th><th>Solusi</th></tr>
+      <tr><td>Data Warga</td><td>Sudah input 20 RT</td><td>80%</td><td>RT kesulitan akses</td><td>Pelatihan teknis</td></tr>
+    </table>
+  </div>
+
+  <div class="box">
+    <h2>Rekap Interaksi & Implementasi - RT</h2>
+    <table id="rekapRT">
+      <tr><th>Perintah</th><th>Respon Warga</th><th>Realisasi</th><th>Hambatan</th><th>Solusi</th></tr>
+      <tr><td>Musyawarah RT</td><td>70% hadir</td><td>Terlaksana</td><td>Cuaca hujan</td><td>Pindah lokasi ke balai</td></tr>
+    </table>
+  </div>
+
+  <div class="box">
+    <h2>Analisis Temuan & Rekomendasi</h2>
+    <ul>
+      <li><strong>Hambatan Umum:</strong> Kurangnya koordinasi & cuaca ekstrem</li>
+      <li><strong>Solusi Efektif:</strong> Pelatihan kader digital & koordinasi mingguan</li>
+      <li><strong>Respon Warga:</strong> Umumnya positif, perlu lebih banyak sosialisasi</li>
+    </ul>
+  </div>
 
   <div class="actions">
-    <button class="btn btn-excel" onclick="exportToExcel()">Unduh Excel Workbook</button>
-    <button class="btn btn-kirim" onclick="kirimKeKades()">Kirim ke Kades & Sekdes</button>
+    <button onclick="exportToExcel()">Simpan Workbook</button>
+    <button onclick="kirimWA('kades')">Kirim ke Kades</button>
+    <button onclick="kirimWA('sekdes')">Kirim ke Sekdes</button>
   </div>
 </section>
 
 <script>
   function exportToExcel() {
-    let table = document.getElementById("rekapTable");
-    let wb = XLSX.utils.table_to_book(table, {sheet: "Rekap"});
-    XLSX.writeFile(wb, "rekap_pelayanan_warga.xlsx");
+    let wb = XLSX.utils.book_new();
+
+    ['Pemdes','Kadus','RW','RT'].forEach(id => {
+      let tbl = document.getElementById(`rekap${id}`);
+      let ws = XLSX.utils.table_to_sheet(tbl);
+      XLSX.utils.book_append_sheet(wb, ws, `Rekap_${id}`);
+    });
+
+    XLSX.writeFile(wb, "Rekap_SIPEDARU.xlsx");
   }
 
-  function kirimKeKades() {
-    let pesan = encodeURIComponent("Rekapitulasi pelayanan warga sudah tersedia. Silakan periksa dan koordinasikan lebih lanjut.");
-    window.open(`https://wa.me/6281234567890?text=${pesan}`, "_blank");
+  function kirimWA(penerima) {
+    let nomor = penerima === 'kades' ? '62812xxxxxxx' : '62813xxxxxxx';
+    let pesan = encodeURIComponent("Berikut laporan Rekap SIPEDARU, silakan buka tautan dan periksa.");
+    window.open(`https://wa.me/${nomor}?text=${pesan}`, '_blank');
   }
 </script>
-
-<!-- SheetJS untuk export Excel -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 
 </body>
 </html>
