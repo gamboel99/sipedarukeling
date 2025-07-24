@@ -1,33 +1,100 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beranda - SIPEDARU</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIPEDARU - Sistem Informasi Dusun RW RT</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #ff0000 0%, #ffffff 100%);
+      color: #333;
+    }
+
+    header {
+      background-color: #d40000;
+      padding: 1rem 2rem;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 4px solid #003d91; /* Biru Korpri */
+    }
+
+    header img {
+      height: 60px;
+    }
+
+    nav {
+      background-color: #fff;
+      border-bottom: 2px solid #003d91;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      padding: 1rem;
+      font-weight: bold;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #d40000;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: #003d91;
+    }
+
+    main {
+      padding: 2rem;
+      text-align: center;
+    }
+
+    h1 {
+      color: #d40000;
+    }
+
+    .btn {
+      background-color: #003d91;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #001e4d;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <img src="garuda.png" alt="Logo Garuda" class="logo">
-        <h1>SIPEDARU</h1>
-        <p>Sistem Informasi Pelayanan dan Data Terpadu Dusun-RW-RT</p>
-    </header>
-<nav>
-    <a href="/index.html">Beranda</a>
-    <a href="/admin/pengumuman.html">Pemdes</a>
-    <a href="/admin/kadus.html">Kadus</a>
-    <a href="/admin/rw.html">RW</a>
-    <a href="/admin/rt.html">RT</a>
-</nav>
+  <header>
+    <div style="display: flex; align-items: center; gap: 1rem">
+      <img src="logo-garuda.png" alt="Logo Garuda">
+      <h2>SIPEDARU</h2>
+    </div>
+    <strong>Sistem Informasi Pelayanan & Data Terpadu Dusun-RW-RT</strong>
+  </header>
 
-    <main>
-        <section class="intro">
-            <h2>Selamat Datang di SIPEDARU</h2>
-            <p>Mempercepat distribusi informasi dan layanan dari Pemerintah Desa hingga ke masyarakat.</p>
-        </section>
-    </main>
-    <footer>
-        <p>&copy; 2025 SIPEDARU - Desa Digital</p>
-    </footer>
+  <nav>
+    <a href="index.html">Beranda</a>
+    <a href="pemdes.html">Pemdes</a>
+    <a href="kadus.html">Kadus</a>
+    <a href="rw.html">RW</a>
+    <a href="rt.html">RT</a>
+    <a href="bantuan.html">Data Bantuan</a>
+    <a href="rekap.html">Rekap</a>
+  </nav>
+
+  <main>
+    <h1>Selamat Datang di SIPEDARU</h1>
+    <p>Sistem informasi terpadu untuk mempercepat layanan dan pendataan dari Kepala Dusun, RW, hingga RT secara digital dan responsif.</p>
+    <br>
+    <a href="bantuan.html" class="btn">Input Data Bantuan</a>
+  </main>
 </body>
 </html>
