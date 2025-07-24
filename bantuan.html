@@ -1,59 +1,140 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-  <title>Input Data Bantuan - SIPEDARU</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Program Bantuan - SIPEDARU</title>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background: #f4f9ff; }
+    header, nav { background: #007bff; color: white; padding: 1rem; text-align: center; }
+    nav a { color: white; margin: 0 10px; text-decoration: none; font-weight: bold; }
+    .container { padding: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; }
+    th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+    th { background-color: #e0f0ff; }
+    textarea, input, select { width: 100%; padding: 8px; margin: 8px 0; }
+    button { padding: 10px 20px; background: #28a745; color: white; border: none; cursor: pointer; }
+    .warning { background-color: #fff3cd; padding: 10px; border-left: 5px solid #ffc107; margin: 10px 0; }
+    .form-section { background: #f9f9f9; padding: 15px; border-radius: 5px; margin-top: 20px; }
+  </style>
 </head>
 <body>
-  <header>
-  <img src="img/garuda.png" alt="Garuda">
-  <h1>SIPEDARU</h1>
-  <p>Sistem Informasi Pelayanan dan Data Terpadu</p>
+
+<header>
+  <h1>SIPEDARU - Sistem Informasi Pelayanan dan Data Terpadu</h1>
 </header>
+
 <nav>
   <a href="index.html">Beranda</a>
   <a href="pemdes.html">Pemdes</a>
   <a href="kadus.html">Kadus</a>
   <a href="rw.html">RW</a>
   <a href="rt.html">RT</a>
-  <a href="bantuan.html">Bantuan</a>
   <a href="rekap.html">Rekap</a>
+  <a href="bantuan.html">Bantuan</a>
 </nav>
+
 <div class="container">
-    <h2>Form Input Bantuan</h2>
-    <form id="formBantuan">
-      <label>Nama Warga:</label><br>
-      <input type="text" name="nama" required><br><br>
+  <h2>📦 Program Bantuan Pemerintah Desa</h2>
 
-      <label>Jenis Bantuan:</label><br>
-      <select name="jenis" required>
-        <option value="">-- Pilih --</option>
-        <option value="Sembako">Sembako</option>
-        <option value="PKH">PKH</option>
-        <option value="BLT">BLT</option>
-        <option value="BPNT">BPNT</option>
-      </select><br><br>
+  <table id="tabelBantuan">
+    <thead>
+      <tr>
+        <th>Nama Program</th>
+        <th>Gelombang</th>
+        <th>Tanggal Pendaftaran</th>
+        <th>Penyaluran</th>
+        <th>Syarat</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Bantuan Langsung Tunai (BLT)</td>
+        <td>Gelombang 1</td>
+        <td>Jan 2025</td>
+        <td>Feb 2025</td>
+        <td>KK, KTP, Surat Keterangan Tidak Mampu</td>
+        <td>Aktif</td>
+      </tr>
+      <tr>
+        <td>Program Sembako</td>
+        <td>Gelombang 2</td>
+        <td>Apr 2025</td>
+        <td>Mei 2025</td>
+        <td>KTP, Kartu Sembako</td>
+        <td>Selesai</td>
+      </tr>
+    </tbody>
+  </table>
 
-      <label>Status Distribusi:</label><br>
-      <select name="status" required>
-        <option value="Belum">Belum</option>
-        <option value="Sudah">Sudah</option>
-      </select><br><br>
+  <button onclick="exportExcel()">📥 Ekspor ke Excel Workbook</button>
 
-      <button type="submit">Simpan</button>
-    </form>
-    <p id="pesan"></p>
+  <div class="warning">
+    <strong>Catatan:</strong> Penyaluran bantuan BLT gelombang 1 mengalami keterlambatan karena ketidaksesuaian data KK dan KTP. Telah ditindaklanjuti dengan verifikasi lapangan.
   </div>
 
-  <script>
-    const form = document.getElementById("formBantuan");
-    const pesan = document.getElementById("pesan");
+  <h3>🎯 Target Penerima Tahun 2026</h3>
+  <ul>
+    <li>BLT: 120 Keluarga</li>
+    <li>Program Sembako: 200 Keluarga</li>
+    <li>Beasiswa Desa: 50 Siswa</li>
+  </ul>
 
-    form.addEventListener("submit", function(e) {
-      e.preventDefault();
-      pesan.innerText = "Data berhasil disimpan!";
-      form.reset();
-    });
-  </script>
+  <div class="form-section">
+    <h3>📝 Tambahkan Program Bantuan Baru</h3>
+    <form id="formBantuan">
+      <label>Nama Program:</label>
+      <input type="text" id="namaProgram" required>
+
+      <label>Gelombang:</label>
+      <input type="text" id="gelombang">
+
+      <label>Tanggal Pendaftaran:</label>
+      <input type="date" id="pendaftaran">
+
+      <label>Jadwal Penyaluran:</label>
+      <input type="date" id="penyaluran">
+
+      <label>Syarat:</label>
+      <textarea id="syarat" required></textarea>
+
+      <label>Status:</label>
+      <select id="status">
+        <option>Aktif</option>
+        <option>Selesai</option>
+        <option>Evaluasi</option>
+      </select>
+
+      <button type="submit">Tambah Program</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  document.getElementById("formBantuan").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const nama = document.getElementById("namaProgram").value;
+    const gelombang = document.getElementById("gelombang").value;
+    const pendaftaran = document.getElementById("pendaftaran").value;
+    const penyaluran = document.getElementById("penyaluran").value;
+    const syarat = document.getElementById("syarat").value;
+    const status = document.getElementById("status").value;
+
+    const table = document.getElementById("tabelBantuan").getElementsByTagName('tbody')[0];
+    const row = table.insertRow();
+    row.innerHTML = `<td>${nama}</td><td>${gelombang}</td><td>${pendaftaran}</td><td>${penyaluran}</td><td>${syarat}</td><td>${status}</td>`;
+
+    document.getElementById("formBantuan").reset();
+  });
+
+  function exportExcel() {
+    const wb = XLSX.utils.table_to_book(document.getElementById('tabelBantuan'), { sheet: "ProgramBantuan" });
+    XLSX.writeFile(wb, "program_bantuan.xlsx");
+  }
+</script>
+
 </body>
 </html>
