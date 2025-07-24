@@ -1,133 +1,173 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dashboard RT - SIPEDARU</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard RT</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #ffffff, #f0f0f0);
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #d90000;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 4px solid #003b6f;
+    }
+    nav {
+      background: #eee;
+      padding: 10px;
+      text-align: center;
+    }
+    nav a {
+      margin: 0 10px;
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+    section {
+      padding: 20px;
+    }
+    .dropdown {
+      margin: 10px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+    }
+    .form-input {
+      margin: 10px 0;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 4px;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #003b6f;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .auth-box {
+      background: #f8f8f8;
+      padding: 20px;
+      margin-top: 20px;
+      border: 1px solid #ccc;
+    }
+  </style>
 </head>
 <body>
-  <header class="header-rt">
-    <h1>SIPEDARU - Dashboard RT</h1>
-    <nav>
-      <ul class="menu">
-        <li><a href="index.html">Beranda</a></li>
-        <li><a href="pemdes.html">Pemdes</a></li>
-        <li><a href="kadus.html">Kadus</a></li>
-        <li><a href="rw.html">RW</a></li>
-        <li><a href="rt.html" class="active">RT</a></li>
-      </ul>
-    </nav>
+  <header>
+    <h1>Dashboard RT</h1>
   </header>
+  <nav>
+    <a href="#info">Informasi Masuk</a>
+    <a href="#agenda">Agenda RT</a>
+    <a href="#laporan">Laporan</a>
+    <a href="#warga">Daftar Warga</a>
+    <a href="#autentikasi">Autentikasi</a>
+  </nav>
 
-  <main class="container">
-    <section class="card">
-      <h2>Informasi dari Ketua RW</h2>
-      <p>Berikut perintah atau informasi terbaru yang perlu ditindaklanjuti oleh RT.</p>
-      <div id="perintahRW">[Contoh perintah RW akan ditampilkan di sini]</div>
-    </section>
+  <section id="info">
+    <h2>Informasi dan Perintah dari RW</h2>
+    <p>(Contoh data informasi RW masuk dan tanggapan warga)</p>
+    <textarea placeholder="Catatan Kendala dan Solusi"></textarea>
+    <select>
+      <option>Status Kendala</option>
+      <option>Sudah Selesai</option>
+      <option>Perlu Dilaporkan ke RW</option>
+    </select>
+  </section>
 
-    <section class="card">
-      <h2>Form Rencana dan Realisasi Tindak Lanjut</h2>
-      <form>
-        <label>Rencana:</label><br/>
-        <textarea rows="3" placeholder="Tuliskan rencana..."></textarea><br/>
-        <label>Realisasi:</label><br/>
-        <textarea rows="3" placeholder="Tuliskan realisasi..."></textarea><br/>
-        <button type="submit">Kirim Laporan</button>
-      </form>
-    </section>
+  <section id="agenda">
+    <h2>Form Input Agenda RT</h2>
+    <div class="form-input">
+      <input type="text" placeholder="Judul Agenda">
+      <textarea placeholder="Deskripsi Agenda"></textarea>
+      <button>Simpan Agenda</button>
+    </div>
+  </section>
 
-    <section class="card">
-      <h2>Distribusi Informasi ke Warga</h2>
-      <p>Status: <span style="color:green;">Sudah 80%</span> warga menerima informasi.</p>
-      <p>Balasan warga dan catatan kendala akan muncul di sini.</p>
-    </section>
+  <section id="laporan">
+    <h2>Tabel Laporan RT</h2>
+    <table id="laporanTabel">
+      <tr><th>Agenda</th><th>Tanggal</th><th>Status</th></tr>
+      <tr><td>Penyuluhan Kesehatan</td><td>2025-07-20</td><td>Selesai</td></tr>
+    </table>
+    <button onclick="exportToExcel()">Unduh Excel Workbook</button>
+  </section>
 
-    <section class="card">
-      <h2>Kendala & Solusi</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Kendala</th><th>Solusi</th><th>Status</th><th>Tindak Lanjut</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Warga tidak hadir</td>
-            <td>Diinformasikan ulang via WA</td>
-            <td>Selesai</td>
-            <td>-</td>
-          </tr>
-          <tr>
-            <td>Tidak ditemukan warga</td>
-            <td>Butuh pendamping RT</td>
-            <td>Belum Selesai</td>
-            <td>Dibawa ke RW</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section class="card">
-      <h2>Data Ketua Masyarakat per RT</h2>
-      <ul>
-        <li>Nama: Bapak Ahmad</li>
-        <li>Alamat: RT 12 / RW 04</li>
-        <li>Telp: 0812-xxx-xxxx</li>
-        <li>Email: ketuart12@gmail.com</li>
-      </ul>
-    </section>
-
-    <section class="card">
-      <h2>Input Agenda RT</h2>
-      <form>
-        <label>Judul Agenda:</label><br/>
-        <input type="text" /><br/>
-        <label>Deskripsi:</label><br/>
-        <textarea rows="2"></textarea><br/>
-        <label>Tanggal:</label><br/>
-        <input type="date" /><br/>
-        <button type="submit">Simpan Agenda</button>
-      </form>
-    </section>
-
-    <section class="card">
-      <h2>Laporan RT (Excel Workbook)</h2>
-      <button onclick="exportExcel()">Unduh Excel</button>
-      <table id="laporanRT">
-        <thead>
-          <tr><th>Agenda</th><th>Tanggal</th><th>Status</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Kerja Bakti</td><td>2025-07-10</td><td>Selesai</td></tr>
-          <tr><td>Pembagian Sembako</td><td>2025-07-15</td><td>Dalam Proses</td></tr>
-        </tbody>
-      </table>
-    </section>
-
-    <section class="card">
-      <h2>Daftar RT (Drop-down Hak Akses)</h2>
-      <label for="rtSelect">Pilih RT:</label>
-      <select id="rtSelect">
-        <option value="">-- Pilih RT --</option>
-        ${[...Array(30).keys()].map(i => `<option value="RT${i+1}">RT ${i+1}</option>`).join('')}
+  <section id="warga">
+    <h2>Daftar Warga RT</h2>
+    <div class="dropdown">
+      <label for="selectRT">Pilih RT:</label>
+      <select id="selectRT">
+        <option value="RT1">RT 01</option>
+        <option value="RT2">RT 02</option>
+        <!-- Tambah sampai RT30 -->
       </select>
-    </section>
+    </div>
+    <table id="tabelWarga">
+      <tr><th>Nama</th><th>Alamat</th><th>Telepon</th><th>Email</th></tr>
+      <tr><td>Andi</td><td>Jl. Melati</td><td>0812345678</td><td>andi@mail.com</td></tr>
+    </table>
+  </section>
 
-    <section class="card">
-      <h2>Daftar Warga RT</h2>
-      <p>Fitur akan menampilkan daftar warga sesuai hak akses RT yang dipilih.</p>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 SIPEDARU | Sistem Informasi Pelayanan & Data Terpadu Dusun-RW-RT</p>
-  </footer>
+  <section id="autentikasi">
+    <h2>Autentikasi Dasar per RT</h2>
+    <div class="auth-box">
+      <label for="username">Username RT:</label>
+      <input type="text" id="username">
+      <label for="password">Password:</label>
+      <input type="password" id="password">
+      <button onclick="loginRT()">Login</button>
+    </div>
+  </section>
 
   <script>
-    function exportExcel() {
-      alert("Ekspor Excel masih dalam tahap pengembangan.");
+    function exportToExcel() {
+      const table = document.getElementById("laporanTabel");
+      let csv = "";
+      for (let row of table.rows) {
+        let rowData = [];
+        for (let cell of row.cells) {
+          rowData.push(cell.textContent);
+        }
+        csv += rowData.join(",") + "\n";
+      }
+      const blob = new Blob([csv], { type: "application/vnd.ms-excel" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "laporan_rt.csv";
+      a.click();
+    }
+
+    function loginRT() {
+      const user = document.getElementById("username").value;
+      const pass = document.getElementById("password").value;
+      if(user.startsWith("rt") && pass === "1234") {
+        alert("Login berhasil sebagai " + user);
+      } else {
+        alert("Login gagal, coba lagi!");
+      }
     }
   </script>
 </body>
