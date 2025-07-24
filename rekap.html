@@ -1,46 +1,124 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-  <title>Rekap Data Bantuan - SIPEDARU</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rekapitulasi Interaksi Pelayanan</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f6f9;
+      color: #333;
+      padding: 20px;
+    }
+    header {
+      background-color: #b22222;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border-radius: 8px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background-color: #fff;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #e6e6e6;
+    }
+    .actions {
+      margin-top: 20px;
+      display: flex;
+      gap: 10px;
+    }
+    .btn {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .btn-excel {
+      background-color: #28a745;
+      color: white;
+    }
+    .btn-kirim {
+      background-color: #007bff;
+      color: white;
+    }
+    @media screen and (max-width: 768px) {
+      .actions {
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
 <body>
-  <header>
-  <img src="img/garuda.png" alt="Garuda">
-  <h1>SIPEDARU</h1>
-  <p>Sistem Informasi Pelayanan dan Data Terpadu</p>
+
+<header>
+  <h1>Rekapitulasi Pelayanan Warga</h1>
+  <p>Dokumentasi Interaksi dari Pemdes hingga RT</p>
 </header>
-<nav>
-  <a href="index.html">Beranda</a>
-  <a href="pemdes.html">Pemdes</a>
-  <a href="kadus.html">Kadus</a>
-  <a href="rw.html">RW</a>
-  <a href="rt.html">RT</a>
-  <a href="bantuan.html">Bantuan</a>
-  <a href="rekap.html">Rekap</a>
-</nav>
-<div class="container">
-    <h2>Rekap Data Bantuan</h2>
-    <table border="1" width="100%" cellpadding="5" cellspacing="0">
+
+<section>
+  <h2>Ringkasan Temuan & Hambatan</h2>
+  <table id="rekapTable">
+    <thead>
       <tr>
-        <th>No</th>
-        <th>Nama</th>
-        <th>Jenis Bantuan</th>
-        <th>Status Distribusi</th>
+        <th>Tanggal</th>
+        <th>Asal Informasi</th>
+        <th>Tujuan Informasi</th>
+        <th>Isi Informasi</th>
+        <th>Hambatan</th>
+        <th>Jumlah Terulang</th>
+        <th>Solusi</th>
+        <th>Realisasi</th>
+        <th>Respon Warga</th>
       </tr>
+    </thead>
+    <tbody>
       <tr>
-        <td>1</td>
-        <td>Siti Aminah</td>
-        <td>Sembako</td>
-        <td>Sudah</td>
+        <td>24-07-2025</td>
+        <td>Pemdes</td>
+        <td>Kadus 1</td>
+        <td>Gotong royong bersih desa</td>
+        <td>Minim alat kebersihan</td>
+        <td>3x</td>
+        <td>Pinjam alat ke desa tetangga</td>
+        <td>Sudah dilakukan</td>
+        <td>Warga antusias, namun butuh air bersih</td>
       </tr>
-      <tr>
-        <td>2</td>
-        <td>Rudi Hartono</td>
-        <td>BLT</td>
-        <td>Belum</td>
-      </tr>
-    </table>
+      <!-- Tambahkan baris sesuai data -->
+    </tbody>
+  </table>
+
+  <div class="actions">
+    <button class="btn btn-excel" onclick="exportToExcel()">Unduh Excel Workbook</button>
+    <button class="btn btn-kirim" onclick="kirimKeKades()">Kirim ke Kades & Sekdes</button>
   </div>
+</section>
+
+<script>
+  function exportToExcel() {
+    let table = document.getElementById("rekapTable");
+    let wb = XLSX.utils.table_to_book(table, {sheet: "Rekap"});
+    XLSX.writeFile(wb, "rekap_pelayanan_warga.xlsx");
+  }
+
+  function kirimKeKades() {
+    let pesan = encodeURIComponent("Rekapitulasi pelayanan warga sudah tersedia. Silakan periksa dan koordinasikan lebih lanjut.");
+    window.open(`https://wa.me/6281234567890?text=${pesan}`, "_blank");
+  }
+</script>
+
+<!-- SheetJS untuk export Excel -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
 </body>
 </html>
