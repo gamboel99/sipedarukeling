@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard RT - SIPEDARU</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header-rt">
+    <h1>SIPEDARU - Dashboard RT</h1>
+    <nav>
+      <ul class="menu">
+        <li><a href="index.html">Beranda</a></li>
+        <li><a href="pemdes.html">Pemdes</a></li>
+        <li><a href="kadus.html">Kadus</a></li>
+        <li><a href="rw.html">RW</a></li>
+        <li><a href="rt.html" class="active">RT</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Informasi dari Ketua RW</h2>
+      <p>Berikut perintah atau informasi terbaru yang perlu ditindaklanjuti oleh RT.</p>
+      <div id="perintahRW">[Contoh perintah RW akan ditampilkan di sini]</div>
+    </section>
+
+    <section class="card">
+      <h2>Form Rencana dan Realisasi Tindak Lanjut</h2>
+      <form>
+        <label>Rencana:</label><br/>
+        <textarea rows="3" placeholder="Tuliskan rencana..."></textarea><br/>
+        <label>Realisasi:</label><br/>
+        <textarea rows="3" placeholder="Tuliskan realisasi..."></textarea><br/>
+        <button type="submit">Kirim Laporan</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Distribusi Informasi ke Warga</h2>
+      <p>Status: <span style="color:green;">Sudah 80%</span> warga menerima informasi.</p>
+      <p>Balasan warga dan catatan kendala akan muncul di sini.</p>
+    </section>
+
+    <section class="card">
+      <h2>Kendala & Solusi</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Kendala</th><th>Solusi</th><th>Status</th><th>Tindak Lanjut</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Warga tidak hadir</td>
+            <td>Diinformasikan ulang via WA</td>
+            <td>Selesai</td>
+            <td>-</td>
+          </tr>
+          <tr>
+            <td>Tidak ditemukan warga</td>
+            <td>Butuh pendamping RT</td>
+            <td>Belum Selesai</td>
+            <td>Dibawa ke RW</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>Data Ketua Masyarakat per RT</h2>
+      <ul>
+        <li>Nama: Bapak Ahmad</li>
+        <li>Alamat: RT 12 / RW 04</li>
+        <li>Telp: 0812-xxx-xxxx</li>
+        <li>Email: ketuart12@gmail.com</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Input Agenda RT</h2>
+      <form>
+        <label>Judul Agenda:</label><br/>
+        <input type="text" /><br/>
+        <label>Deskripsi:</label><br/>
+        <textarea rows="2"></textarea><br/>
+        <label>Tanggal:</label><br/>
+        <input type="date" /><br/>
+        <button type="submit">Simpan Agenda</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Laporan RT (Excel Workbook)</h2>
+      <button onclick="exportExcel()">Unduh Excel</button>
+      <table id="laporanRT">
+        <thead>
+          <tr><th>Agenda</th><th>Tanggal</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Kerja Bakti</td><td>2025-07-10</td><td>Selesai</td></tr>
+          <tr><td>Pembagian Sembako</td><td>2025-07-15</td><td>Dalam Proses</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card">
+      <h2>Daftar RT (Drop-down Hak Akses)</h2>
+      <label for="rtSelect">Pilih RT:</label>
+      <select id="rtSelect">
+        <option value="">-- Pilih RT --</option>
+        ${[...Array(30).keys()].map(i => `<option value="RT${i+1}">RT ${i+1}</option>`).join('')}
+      </select>
+    </section>
+
+    <section class="card">
+      <h2>Daftar Warga RT</h2>
+      <p>Fitur akan menampilkan daftar warga sesuai hak akses RT yang dipilih.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 SIPEDARU | Sistem Informasi Pelayanan & Data Terpadu Dusun-RW-RT</p>
+  </footer>
+
+  <script>
+    function exportExcel() {
+      alert("Ekspor Excel masih dalam tahap pengembangan.");
+    }
+  </script>
+</body>
+</html>
