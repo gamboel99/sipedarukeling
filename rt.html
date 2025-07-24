@@ -1,174 +1,212 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard RT</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard Ketua RT | SIPEDARU</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to bottom, #ffffff, #f0f0f0);
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f2f2f2;
       color: #333;
       margin: 0;
       padding: 0;
     }
-    header {
-      background-color: #d90000;
+    header, nav {
+      background-color: #8b0000;
       color: white;
-      padding: 20px;
+      padding: 1rem;
       text-align: center;
-      border-bottom: 4px solid #003b6f;
     }
     nav {
-      background: #eee;
-      padding: 10px;
-      text-align: center;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
     }
     nav a {
-      margin: 0 10px;
+      color: white;
       text-decoration: none;
-      color: #333;
+      margin: 0.5rem;
       font-weight: bold;
     }
-    section {
-      padding: 20px;
+    main {
+      padding: 1rem;
+      max-width: 1000px;
+      margin: auto;
+      background: white;
     }
-    .dropdown {
-      margin: 10px 0;
+    section {
+      margin-bottom: 2rem;
+    }
+    label, input, select, textarea {
+      display: block;
+      width: 100%;
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
+      padding: 0.5rem;
     }
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 20px;
+      margin-top: 1rem;
     }
     table, th, td {
       border: 1px solid #ccc;
     }
     th, td {
-      padding: 8px;
+      padding: 0.5rem;
       text-align: left;
     }
-    .form-input {
-      margin: 10px 0;
-    }
-    input, textarea, select {
-      width: 100%;
-      padding: 8px;
-      margin-top: 4px;
-      box-sizing: border-box;
-    }
     button {
-      background-color: #003b6f;
+      padding: 0.5rem 1rem;
+      background-color: #8b0000;
       color: white;
       border: none;
-      padding: 10px 20px;
       cursor: pointer;
-      margin-top: 10px;
     }
-    .auth-box {
-      background: #f8f8f8;
-      padding: 20px;
-      margin-top: 20px;
-      border: 1px solid #ccc;
+    button:hover {
+      background-color: #a52a2a;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Dashboard RT</h1>
-  </header>
-  <nav>
-    <a href="#info">Informasi Masuk</a>
-    <a href="#agenda">Agenda RT</a>
-    <a href="#laporan">Laporan</a>
-    <a href="#warga">Daftar Warga</a>
-    <a href="#autentikasi">Autentikasi</a>
-  </nav>
 
-  <section id="info">
-    <h2>Informasi dan Perintah dari RW</h2>
-    <p>(Contoh data informasi RW masuk dan tanggapan warga)</p>
-    <textarea placeholder="Catatan Kendala dan Solusi"></textarea>
-    <select>
-      <option>Status Kendala</option>
-      <option>Sudah Selesai</option>
-      <option>Perlu Dilaporkan ke RW</option>
+<header>
+  <h1>SIPEDARU - Dashboard Ketua RT</h1>
+</header>
+
+<nav>
+  <a href="index.html">Beranda</a>
+  <a href="pemdes.html">Info Pemdes</a>
+  <a href="kadus.html">Dashboard Kadus</a>
+  <a href="rw.html">Dashboard RW</a>
+  <a href="rt.html">Dashboard RT</a>
+</nav>
+
+<main>
+
+  <section>
+    <h2>Autentikasi RT</h2>
+    <label for="rtLogin">Pilih RT:</label>
+    <select id="rtLogin">
+      <option value="">-- Pilih RT --</option>
+      ${[...Array(30)].map((_, i) => `<option value="RT${i+1}">RT ${i+1}</option>`).join('')}
     </select>
+    <label for="password">Password:</label>
+    <input type="password" id="password" placeholder="Masukkan password" />
+    <button onclick="loginRT()">Login</button>
   </section>
 
-  <section id="agenda">
-    <h2>Form Input Agenda RT</h2>
-    <div class="form-input">
-      <input type="text" placeholder="Judul Agenda">
-      <textarea placeholder="Deskripsi Agenda"></textarea>
-      <button>Simpan Agenda</button>
-    </div>
+  <section>
+    <h2>Input Agenda Kegiatan RT</h2>
+    <label for="agenda">Rencana Kegiatan:</label>
+    <textarea id="agenda" rows="4" placeholder="Tulis agenda kegiatan..."></textarea>
+    <button onclick="simpanAgenda()">Simpan Agenda</button>
   </section>
 
-  <section id="laporan">
-    <h2>Tabel Laporan RT</h2>
-    <table id="laporanTabel">
-      <tr><th>Agenda</th><th>Tanggal</th><th>Status</th></tr>
-      <tr><td>Penyuluhan Kesehatan</td><td>2025-07-20</td><td>Selesai</td></tr>
+  <section>
+    <h2>Laporan Realisasi Instruksi RW</h2>
+    <textarea id="laporanRealisasi" rows="4" placeholder="Laporan pelaksanaan perintah RW..."></textarea>
+    <label>Status Kendala:</label>
+    <select id="statusKendala">
+      <option value="selesai">Terselesaikan</option>
+      <option value="butuh-eskalasi">Perlu Eskalasi ke RW/Kadus/Pemdes</option>
+    </select>
+    <button onclick="simpanLaporan()">Simpan Laporan</button>
+  </section>
+
+  <section>
+    <h2>Distribusi Informasi ke Warga & Feedback</h2>
+    <textarea id="isiInfo" rows="3" placeholder="Isi informasi untuk warga..."></textarea>
+    <button onclick="kirimWA()">Kirim ke WA Grup</button>
+    <h3>Feedback Warga</h3>
+    <ul id="feedbackList">
+      <li>Warga A: Sudah diterima, terima kasih!</li>
+      <li>Warga B: Mohon penjelasan lebih lanjut soal agenda...</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Daftar Ketua Masyarakat per RT</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Nama</th><th>Alamat</th><th>No. Telp</th><th>Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Bpk. Darto</td><td>RT 1 / RW 1</td><td>0812xxxx</td><td>darto@contoh.com</td>
+        </tr>
+        <!-- Tambahkan data lainnya -->
+      </tbody>
     </table>
-    <button onclick="exportToExcel()">Unduh Excel Workbook</button>
   </section>
 
-  <section id="warga">
-    <h2>Daftar Warga RT</h2>
-    <div class="dropdown">
-      <label for="selectRT">Pilih RT:</label>
-      <select id="selectRT">
-        <option value="RT1">RT 01</option>
-        <option value="RT2">RT 02</option>
-        <!-- Tambah sampai RT30 -->
-      </select>
-    </div>
-    <table id="tabelWarga">
-      <tr><th>Nama</th><th>Alamat</th><th>Telepon</th><th>Email</th></tr>
-      <tr><td>Andi</td><td>Jl. Melati</td><td>0812345678</td><td>andi@mail.com</td></tr>
-    </table>
-  </section>
-
-  <section id="autentikasi">
-    <h2>Autentikasi Dasar per RT</h2>
-    <div class="auth-box">
-      <label for="username">Username RT:</label>
-      <input type="text" id="username">
-      <label for="password">Password:</label>
-      <input type="password" id="password">
-      <button onclick="loginRT()">Login</button>
+  <section>
+    <h2>Daftar Warga per RT</h2>
+    <label for="dropdownRT">Pilih RT:</label>
+    <select id="dropdownRT">
+      ${[...Array(30)].map((_, i) => `<option value="RT${i+1}">RT ${i+1}</option>`).join('')}
+    </select>
+    <div id="daftarWarga">
+      <!-- Data warga akan dimunculkan di sini -->
     </div>
   </section>
 
-  <script>
-    function exportToExcel() {
-      const table = document.getElementById("laporanTabel");
-      let csv = "";
-      for (let row of table.rows) {
-        let rowData = [];
-        for (let cell of row.cells) {
-          rowData.push(cell.textContent);
-        }
-        csv += rowData.join(",") + "\n";
-      }
-      const blob = new Blob([csv], { type: "application/vnd.ms-excel" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "laporan_rt.csv";
-      a.click();
-    }
+  <section>
+    <h2>Ekspor Data ke Excel</h2>
+    <button onclick="exportToExcel()">Unduh Laporan</button>
+  </section>
 
-    function loginRT() {
-      const user = document.getElementById("username").value;
-      const pass = document.getElementById("password").value;
-      if(user.startsWith("rt") && pass === "1234") {
-        alert("Login berhasil sebagai " + user);
-      } else {
-        alert("Login gagal, coba lagi!");
-      }
+</main>
+
+<script>
+  function loginRT() {
+    const rt = document.getElementById('rtLogin').value;
+    const pass = document.getElementById('password').value;
+    if (rt && pass === "12345") {
+      alert(`Login berhasil sebagai ${rt}`);
+    } else {
+      alert("RT atau password salah!");
     }
-  </script>
+  }
+
+  function simpanAgenda() {
+    const agenda = document.getElementById('agenda').value;
+    alert(`Agenda disimpan: ${agenda}`);
+  }
+
+  function simpanLaporan() {
+    const laporan = document.getElementById('laporanRealisasi').value;
+    const status = document.getElementById('statusKendala').value;
+    alert(`Laporan disimpan: ${laporan} - Status: ${status}`);
+  }
+
+  function kirimWA() {
+    const info = document.getElementById('isiInfo').value;
+    const waLink = `https://wa.me/?text=${encodeURIComponent(info)}`;
+    window.open(waLink, '_blank');
+  }
+
+  function exportToExcel() {
+    alert("Fitur ekspor Excel aktif (simulasi) — bisa integrasi SheetJS.js untuk real.");
+  }
+
+  // Simulasi data warga
+  const warga = {
+    RT1: ["Warga A", "Warga B"],
+    RT2: ["Warga C", "Warga D"],
+    // dst...
+  };
+
+  document.getElementById("dropdownRT").addEventListener("change", function() {
+    const rt = this.value;
+    const list = warga[rt] || ["Belum ada data"];
+    document.getElementById("daftarWarga").innerHTML =
+      `<ul>${list.map(w => `<li>${w}</li>`).join("")}</ul>`;
+  });
+</script>
+
 </body>
 </html>
