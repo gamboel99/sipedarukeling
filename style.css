@@ -7,16 +7,34 @@ body {
 }
 
 header {
-    background-color: #003366;
+    background-color: #cc0000;
     color: white;
     text-align: center;
-    padding: 1rem 0;
-    border-bottom: 5px solid #ff0000;
+    padding: 1rem 0.5rem;
+    border-bottom: 4px solid #003366;
+    position: relative;
 }
 
 .logo {
-    width: 80px;
-    margin-top: 10px;
+    width: 60px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+nav {
+    background-color: #e60000;
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem 0;
+    gap: 2rem;
+    border-bottom: 2px solid #003366;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
 }
 
 main {
