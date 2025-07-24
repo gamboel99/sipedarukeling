@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Input Data Bantuan - SIPEDARU</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+  <img src="img/garuda.png" alt="Garuda">
+  <h1>SIPEDARU</h1>
+  <p>Sistem Informasi Pelayanan dan Data Terpadu</p>
+</header>
+<nav>
+  <a href="index.html">Beranda</a>
+  <a href="pemdes.html">Pemdes</a>
+  <a href="kadus.html">Kadus</a>
+  <a href="rw.html">RW</a>
+  <a href="rt.html">RT</a>
+  <a href="bantuan.html">Bantuan</a>
+  <a href="rekap.html">Rekap</a>
+</nav>
+<div class="container">
+    <h2>Form Input Bantuan</h2>
+    <form id="formBantuan">
+      <label>Nama Warga:</label><br>
+      <input type="text" name="nama" required><br><br>
+
+      <label>Jenis Bantuan:</label><br>
+      <select name="jenis" required>
+        <option value="">-- Pilih --</option>
+        <option value="Sembako">Sembako</option>
+        <option value="PKH">PKH</option>
+        <option value="BLT">BLT</option>
+        <option value="BPNT">BPNT</option>
+      </select><br><br>
+
+      <label>Status Distribusi:</label><br>
+      <select name="status" required>
+        <option value="Belum">Belum</option>
+        <option value="Sudah">Sudah</option>
+      </select><br><br>
+
+      <button type="submit">Simpan</button>
+    </form>
+    <p id="pesan"></p>
+  </div>
+
+  <script>
+    const form = document.getElementById("formBantuan");
+    const pesan = document.getElementById("pesan");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      pesan.innerText = "Data berhasil disimpan!";
+      form.reset();
+    });
+  </script>
+</body>
+</html>
