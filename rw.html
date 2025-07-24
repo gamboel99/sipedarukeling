@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard RW - SIPEDARU</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    header {
+      background-color: #b30000;
+      color: white;
+      padding: 1rem 2rem;
+      text-align: center;
+    }
+    nav {
+      background-color: #e0e0e0;
+      padding: 0.5rem 1rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+    .container {
+      padding: 2rem;
+    }
+    h2 {
+      border-bottom: 2px solid #0066cc;
+      padding-bottom: 0.5rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 2rem;
+    }
+    table, th, td {
+      border: 1px solid #aaa;
+    }
+    th, td {
+      padding: 0.5rem;
+      text-align: left;
+    }
+    form input, form textarea, form button, form select {
+      display: block;
+      margin: 0.5rem 0;
+      padding: 0.5rem;
+      width: 100%;
+      max-width: 500px;
+    }
+    .btn-export {
+      background-color: #007e6a;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+    }
+    .status {
+      padding: 0.25rem 0.5rem;
+      border-radius: 5px;
+    }
+    .selesai { background-color: #d4edda; color: #155724; }
+    .belum { background-color: #f8d7da; color: #721c24; }
+    .perlu { background-color: #fff3cd; color: #856404; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Dashboard RW - SIPEDARU</h1>
+  </header>
+
+  <nav>
+    <a href="index.html">Beranda</a>
+    <a href="pemdes.html">Pemdes</a>
+    <a href="kadus.html">Kadus</a>
+    <a href="rw.html">RW</a>
+    <a href="rt.html">RT</a>
+    <a href="rekap.html">Rekap</a>
+  </nav>
+
+  <div class="container">
+    <h2>Informasi & Perintah dari Kadus</h2>
+    <p><strong>Judul:</strong> Distribusi Bantuan Sembako</p>
+    <p><strong>Isi:</strong> Mohon segera dilakukan pendataan keluarga prasejahtera di wilayah masing-masing RT. Data disetor maksimal tanggal 30 Juli.</p>
+
+    <h2>Rencana & Realisasi</h2>
+    <ul>
+      <li>Rencana: Koordinasi dengan RT (24 Juli)</li>
+      <li>Realisasi: 3 RT sudah merespon, 2 RT dalam proses</li>
+    </ul>
+
+    <h2>Distribusi Informasi ke RT</h2>
+    <table>
+      <tr>
+        <th>RT</th>
+        <th>Ketua RT</th>
+        <th>Balasan</th>
+        <th>Kendala</th>
+        <th>Status</th>
+      </tr>
+      <tr>
+        <td>RT 01</td>
+        <td>Ahmad</td>
+        <td>Data dikumpulkan, siap setor</td>
+        <td>-</td>
+        <td><span class="status selesai">Selesai</span></td>
+      </tr>
+      <tr>
+        <td>RT 02</td>
+        <td>Linda</td>
+        <td>Kesulitan mengumpulkan data</td>
+        <td>Beberapa warga sedang di luar kota</td>
+        <td><span class="status perlu">Perlu bantuan Kadus</span></td>
+      </tr>
+      <tr>
+        <td>RT 03</td>
+        <td>Bayu</td>
+        <td>Segera dikirim</td>
+        <td>-</td>
+        <td><span class="status belum">Belum</span></td>
+      </tr>
+    </table>
+
+    <h2>Form Agenda RW</h2>
+    <form>
+      <label>Judul Agenda</label>
+      <input type="text" placeholder="Contoh: Pendataan warga penerima bantuan">
+
+      <label>Isi</label>
+      <textarea placeholder="Isi agenda dan perintah kepada RT"></textarea>
+
+      <button type="submit">Kirim ke RT</button>
+    </form>
+
+    <h2>Data Ketua RT</h2>
+    <table>
+      <tr>
+        <th>Nama</th>
+        <th>Alamat</th>
+        <th>No. Telp</th>
+        <th>Email</th>
+      </tr>
+      <tr>
+        <td>Ahmad</td>
+        <td>Jl. Kenanga RT 01</td>
+        <td>08123456789</td>
+        <td>ahmad@desa.id</td>
+      </tr>
+      <tr>
+        <td>Linda</td>
+        <td>Jl. Melati RT 02</td>
+        <td>08234567890</td>
+        <td>linda@desa.id</td>
+      </tr>
+      <tr>
+        <td>Bayu</td>
+        <td>Jl. Mawar RT 03</td>
+        <td>08345678901</td>
+        <td>bayu@desa.id</td>
+      </tr>
+    </table>
+
+    <button class="btn-export" onclick="exportExcel()">Unduh Laporan Excel</button>
+  </div>
+
+  <script>
+    function exportExcel() {
+      alert('Fitur export ke Excel belum aktif. Integrasi akan dilakukan menggunakan SheetJS atau backend PHP.');
+    }
+  </script>
+</body>
+</html>
