@@ -3,76 +3,45 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dashboard Pemdes - SIPEDARU</title>
+  <title>Halaman Pemdes | SIPEDARU</title>
+  <link rel="stylesheet" href="style.css">
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #f5f5f5;
-    }
-
-    header {
-      background-color: #c62828; /* Merah */
-      color: white;
-      padding: 1rem 2rem;
-      border-bottom: 4px solid #005ea2; /* Biru Korpri */
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    header img {
-      height: 50px;
-    }
-
-    nav {
-      background: #e53935;
-      display: flex;
-      gap: 1rem;
-      padding: 0.8rem 2rem;
-    }
-
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background-color: #f2f2f2; }
+    header { background-color: #c8102e; color: white; padding: 1rem 2rem; text-align: center; }
+    nav { background-color: #002868; display: flex; padding: 0.5rem; flex-wrap: wrap; }
     nav a {
       color: white;
       text-decoration: none;
-      font-weight: bold;
+      margin: 0.5rem;
+      padding: 0.5rem 1rem;
+      background-color: #003e7e;
+      border-radius: 5px;
     }
-
-    nav a:hover {
-      text-decoration: underline;
+    main { padding: 2rem; }
+    h2 { color: #002868; }
+    label { display: block; margin-top: 1rem; }
+    input, textarea, select {
+      width: 100%; padding: 0.5rem; margin-top: 0.2rem; border: 1px solid #ccc; border-radius: 4px;
     }
-
-    .container {
-      max-width: 1000px;
-      margin: 2rem auto;
-      background: white;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    button {
+      margin-top: 1rem; padding: 0.6rem 1.5rem; background-color: #c8102e; color: white;
+      border: none; border-radius: 4px; cursor: pointer;
     }
-
-    .section-title {
-      font-size: 1.5rem;
-      color: #c62828;
-      border-left: 5px solid #005ea2;
-      padding-left: 10px;
-      margin-bottom: 1rem;
-    }
-
-    .info-box {
-      background: #fce4ec;
-      border-left: 4px solid #ec407a;
-      padding: 1rem;
-      margin-bottom: 1rem;
-      border-radius: 6px;
+    table { width: 100%; margin-top: 1.5rem; border-collapse: collapse; background-color: white; }
+    th, td { padding: 0.75rem; border: 1px solid #ccc; text-align: left; }
+    th { background-color: #003e7e; color: white; }
+    .info-box { background: #fff3cd; border-left: 5px solid #ffc107; padding: 1rem; margin-top: 1rem; }
+    .send-wa { background-color: #25D366; margin-left: 1rem; }
+    footer { background: #002868; color: white; text-align: center; padding: 1rem; margin-top: 2rem; }
+    @media (max-width: 768px) {
+      nav a { flex: 1 1 100%; text-align: center; }
     }
   </style>
 </head>
 <body>
 
 <header>
-  <h1>SIPEDARU</h1>
-  <img src="garuda.png" alt="Logo Garuda">
+  <h1>SIPEDARU - Sistem Informasi Pelayanan & Data Terpadu</h1>
 </header>
 
 <nav>
@@ -81,30 +50,90 @@
   <a href="kadus.html">Kadus</a>
   <a href="rw.html">RW</a>
   <a href="rt.html">RT</a>
-  <a href="bantuan.html">Data Bantuan</a>
+  <a href="bantuan.html">Bantuan</a>
   <a href="rekap.html">Rekap</a>
 </nav>
 
-<div class="container">
-  <h2 class="section-title">Dashboard Pemerintah Desa</h2>
+<main>
+  <h2>Informasi & Perintah dari Pemdes</h2>
 
   <div class="info-box">
-    <strong>Informasi Penting:</strong> Harap segera update data warga yang berhak menerima bantuan terbaru sebelum tanggal 28 bulan ini.
+    <strong>Catatan:</strong> Gunakan form di bawah ini untuk menyampaikan informasi resmi kepada seluruh Kepala Dusun (Kasun).
   </div>
 
-  <div class="info-box">
-    <strong>Status Bantuan:</strong> Distribusi bantuan tahap ke-2 masih menunggu konfirmasi dari Dinas Sosial.
-  </div>
+  <form id="formPemdes">
+    <label for="judul">Judul Informasi</label>
+    <input type="text" id="judul" required>
 
-  <div class="info-box">
-    <strong>Koordinasi:</strong> Diharapkan Kepala Dusun segera menyampaikan laporan screening RT paling lambat hari Jumat.
-  </div>
+    <label for="isi">Isi Informasi / Perintah</label>
+    <textarea id="isi" rows="5" required></textarea>
 
-  <div class="info-box">
-    <strong>Agenda Desa:</strong> Rakor rutin tiap awal bulan akan dilaksanakan kembali tanggal 5 mendatang di Balai Desa.
-  </div>
+    <button type="submit">Kirim ke Semua Kasun</button>
+    <button class="send-wa" onclick="kirimKeWhatsApp()">Kirim ke WhatsApp Kasun</button>
+  </form>
 
-</div>
+  <h2>Daftar Feedback & Laporan dari Kasun</h2>
+  <table id="tabelFeedback">
+    <thead>
+      <tr>
+        <th>Nama Kasun</th>
+        <th>Isi Balasan</th>
+        <th>Status</th>
+        <th>Tanggal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Data dummy contoh -->
+      <tr>
+        <td>Kasun Timur</td>
+        <td>Siap dilaksanakan dan sudah disampaikan ke RW.</td>
+        <td>Selesai</td>
+        <td>24 Juli 2025</td>
+      </tr>
+      <tr>
+        <td>Kasun Barat</td>
+        <td>Perlu koordinasi tambahan. Jadwal akan dikonfirmasi.</td>
+        <td>Proses</td>
+        <td>24 Juli 2025</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button onclick="exportTableToExcel('tabelFeedback', 'laporan_kasun')">Export Excel</button>
+</main>
+
+<footer>
+  &copy; 2025 SIPEDARU - Pemerintah Desa Keling. All rights reserved.
+</footer>
+
+<script>
+  function kirimKeWhatsApp() {
+    const judul = document.getElementById("judul").value;
+    const isi = document.getElementById("isi").value;
+    const link = `https://wa.me/?text=🛑 *INFORMASI DARI PEMDES* 🛑%0A%0A*${encodeURIComponent(judul)}*%0A${encodeURIComponent(isi)}`;
+    window.open(link, "_blank");
+  }
+
+  document.getElementById("formPemdes").addEventListener("submit", function(e) {
+    e.preventDefault();
+    alert("Informasi berhasil dikirim ke seluruh Kasun!");
+    // Di dunia nyata, ini dikirim ke server / database
+    document.getElementById("formPemdes").reset();
+  });
+
+  function exportTableToExcel(tableID, filename = ''){
+    let dataType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    let tableSelect = document.getElementById(tableID);
+    let tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+    let downloadLink = document.createElement("a");
+    document.body.appendChild(downloadLink);
+
+    downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+    downloadLink.download = filename ? filename + '.xls' : 'data_excel.xls';
+    downloadLink.click();
+  }
+</script>
 
 </body>
 </html>
